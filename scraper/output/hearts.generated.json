@@ -1,0 +1,82 @@
+[
+  {
+    "id": "red-heart",
+    "name": "Red Heart",
+    "localPath": "/images/hearts/red-heart-full.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "half-red-heart",
+    "name": "Half Red Heart",
+    "localPath": "/images/hearts/red-heart-half.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "soul-heart",
+    "name": "Soul Heart",
+    "localPath": "/images/hearts/soul-heart-full.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "half-soul-heart",
+    "name": "Half Soul Heart",
+    "localPath": "/images/hearts/soul-heart-half.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "black-heart",
+    "name": "Black Heart",
+    "localPath": "/images/hearts/black-heart-full.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "eternal-heart",
+    "name": "Eternal Heart",
+    "localPath": "/images/hearts/eternal-heart.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "gold-heart",
+    "name": "Gold Heart",
+    "localPath": "/images/hearts/golden-heart.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "broken-heart",
+    "name": "Broken Heart",
+    "localPath": "/images/hearts/broken-heart.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "bone-heart",
+    "name": "Bone Heart",
+    "localPath": "/images/hearts/bone-heart-empty.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  },
+  {
+    "id": "rotten-heart",
+    "name": "Rotten Heart",
+    "localPath": "/images/hearts/rotten-heart.png",
+    "sourcePage": "https://bindingofisaacrebirth.fandom.com/wiki/Hearts",
+    "sourceImage": null,
+    "downloaded": false
+  }
+]

@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
-import items from "../data/items.json";
-import synergies from "../data/synergies.json";
+import items from "../data/items.generated.json";
 
 function ItemPage() {
   const { itemId } = useParams();
@@ -9,11 +8,6 @@ function ItemPage() {
   const selectedItem = items.find(
     (item) => item.id === itemId
   );
-
-  const itemSynergies = synergies.filter((synergy) =>
-    synergy.items.includes(itemId)
-  );
-  
 
   if (!selectedItem) {
     return (
@@ -24,6 +18,12 @@ function ItemPage() {
       </div>
     );
   }
+
+  const imageUrl = selectedItem.imageSource
+    ? selectedItem.imageSource.startsWith("/")
+      ? `https://bindingofisaacrebirth.wiki.gg${selectedItem.imageSource}`
+      : selectedItem.imageSource
+    : selectedItem.image;
 
   return (
     <div
@@ -43,74 +43,130 @@ function ItemPage() {
         ← Back
       </Link>
 
-      <h1>{selectedItem.name}</h1>
+      <img
+        src={imageUrl}
+        alt={selectedItem.name}
+        style={{
+          display: "block",
+          width: "120px",
+          height: "120px",
+          objectFit: "contain",
+          margin: "30px auto 10px",
+        }}
+      />
 
-      <p>
-        <strong>ID:</strong> {selectedItem.id}
-      </p>
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "4rem",
+          color: "#fff",
+          margin: "0 0 34px",
+        }}
+      >
+        {selectedItem.name}
+      </h1>
 
-      <p>
-        <strong>Quality:</strong> {selectedItem.quality}
-      </p>
+      <div
+        style={{
+          background: "#d4af37",
+          color: "black",
+          padding: "6px 12px",
+          borderRadius: "8px",
+          display: "block",
+          width: "fit-content",
+          margin: "0 auto 20px",
+          fontSize: "0.9rem",
+          fontWeight: "bold",
+        }}
+      >
+        Quality {selectedItem.quality}
+      </div>
 
       {selectedItem.description && (
+         <div
+        style={{
+            background: "#222",
+            padding: "20px",
+            borderRadius: "12px",
+            maxWidth: "700px",
+            margin: "0 auto",
+            marginTop: "20px",
+            lineHeight: "1.8",
+        }}
+        >
+        <h2
+            style={{
+            color: "#d4af37",
+            marginTop: 0,
+            }}
+        >
+            Description
+        </h2>
+
         <p>{selectedItem.description}</p>
-      )}
+        </div>
 
-      <h2>Known Synergies</h2>
-
-      {itemSynergies.length === 0 && (
-        <p>No documented synergies yet.</p>
       )}
 
       <div
         style={{
           display: "flex",
+          justifyContent: "center",
+          gap: "20px",
           flexWrap: "wrap",
-          gap: "15px",
+          marginTop: "30px",
+          maxWidth: "700px",
+          marginLeft: "auto",
+          marginRight: "auto",
         }}
       >
-        {itemSynergies.map((synergy) => (
-          <div
-            key={synergy.id}
+        <div
+          style={{
+            flex: "1 1 240px",
+            background: "#222",
+            borderRadius: "12px",
+            padding: "18px",
+            textAlign: "center",
+          }}
+        >
+          <h3
             style={{
-              background: "#333",
-              padding: "15px",
-              borderRadius: "10px",
-              width: "250px",
+              color: "#d4af37",
+              margin: "0 0 10px",
             }}
           >
-            <p>
-              <strong>{synergy.type}</strong>
-            </p>
+            Quote
+          </h3>
 
-            <p>{synergy.description}</p>
+          <p
+            style={{
+              fontStyle: "italic",
+            }}
+          >
+            "{selectedItem.quote}"
+          </p>
+        </div>
 
-            <p>
-              Related Items:
-            </p>
+        <div
+          style={{
+            flex: "1 1 240px",
+            background: "#222",
+            borderRadius: "12px",
+            padding: "18px",
+            textAlign: "center",
+          }}
+        >
+          <h3
+            style={{
+              color: "#d4af37",
+              margin: "0 0 10px",
+            }}
+          >
+            Type
+          </h3>
 
-            <ul>
-              {synergy.items
-                .filter(
-                  (id) => id !== itemId
-                )
-                .map((id) => {
-                  const relatedItem = items.find(
-                    (item) => item.id === id
-                  );
-
-                  return (
-                    <li key={id}>
-                      {relatedItem
-                        ? relatedItem.name
-                        : id}
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-        ))}
+          <p>{selectedItem.type}</p>
+        </div>
       </div>
     </div>
   );

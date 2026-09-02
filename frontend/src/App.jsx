@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ItemPage from "./pages/ItemPage";
+import ComparePage from "./pages/ComparePage";
+import CoachPage from "./pages/CoachPage";
 
 function App() {
   return (
@@ -13,6 +15,16 @@ function App() {
       <Route
         path="/item/:itemId"
         element={<ItemPage />}
+      />
+
+      <Route
+        path="/compare"
+        element={<ComparePage />}
+      />
+
+      <Route
+        path="/coach"
+        element={<CoachPage />}
       />
     </Routes>
   );
