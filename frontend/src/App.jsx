@@ -11,15 +11,12 @@ function App() {
   // Store the currently selected item
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Find every synergy whose item list contains the current item
-  const itemSynergies = synergies.filter((synergy) =>
-    synergy.items.includes(itemId)
-  );
-  ``
-  // Get all connected items except the currently selected item
-  const relatedItemIds = synergy.items.filter(
-    (relatedItemId) => relatedItemId !== itemId
-  );
+  // Find all synergies that contain the selected item
+  const itemSynergies = selectedItem
+    ? synergies.filter((synergy) =>
+        synergy.items.includes(selectedItem.id)
+      )
+    : [];
 
   return (
     <div
@@ -36,9 +33,10 @@ function App() {
           fontSize: "4rem",
           color: "#d4af37",
           textShadow: "0 0 20px rgba(212,175,55,0.6)",
+          textAlign: "center",
         }}
       >
-        ISAAC SYNERGY GRAPH
+        ISAAC ORACLE
       </h1>
 
       {/* Item button container */}
@@ -69,7 +67,7 @@ function App() {
         ))}
       </div>
 
-      {/* Show item details only when an item is selected */}
+      {/* Show selected item information */}
       {selectedItem && (
         <div
           style={{
@@ -79,20 +77,27 @@ function App() {
             borderRadius: "10px",
           }}
         >
-          {/* Selected item information */}
+          {/* Item title */}
           <h2>{selectedItem.name}</h2>
 
+          {/* Item ID */}
           <p>
             <strong>ID:</strong> {selectedItem.id}
           </p>
 
+          {/* Item quality */}
           <p>
             <strong>Quality:</strong> {selectedItem.quality}
           </p>
 
-          {/* Synergy section */}
-          <h3>Synergies</h3>
+          {/* Optional description */}
+          {selectedItem.description && (
+            <p>{selectedItem.description}</p>
+          )}
 
+          <h3>Known Synergies</h3>
+
+          {/* Synergy cards */}
           <div
             style={{
               display: "flex",
@@ -100,39 +105,55 @@ function App() {
               gap: "15px",
             }}
           >
-            {itemSynergies.map((synergy, index) => (
-              <div
-                key={index}
-                style={{
-                  background: "#333",
-                  padding: "15px",
-                  borderRadius: "10px",
-                  width: "220px",
-                  border: "1px solid #555",
-                }}
-              >
-                {/* Synergy type */}
-                <p
+            {itemSynergies.map((synergy) => {
+              // Get all related items except the selected item
+              const relatedItems = synergy.items.filter(
+                (itemId) => itemId !== selectedItem.id
+              );
+
+              return (
+                <div
+                  key={synergy.id}
                   style={{
-                    color:
+                    background: "#333",
+                    padding: "15px",
+                    borderRadius: "10px",
+                    width: "250px",
+                    border:
                       synergy.type === "positive"
-                        ? "lightgreen"
-                        : "orange",
-                    fontWeight: "bold",
+                        ? "2px solid lightgreen"
+                        : "2px solid orange",
                   }}
                 >
-                  {synergy.type}
-                </p>
+                  {/* Synergy type */}
+                  <p
+                    style={{
+                      color:
+                        synergy.type === "positive"
+                          ? "lightgreen"
+                          : "orange",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {synergy.type}
+                  </p>
 
-                {/* Synergy connection */}
-                <p>
-                  {synergy.source} ↔ {synergy.target}
-                </p>
+                  {/* Related items */}
+                  <p>
+                    <strong>Items:</strong>
+                  </p>
 
-                {/* Synergy description */}
-                <p>{synergy.description}</p>
-              </div>
-            ))}
+                  <ul>
+                    {relatedItems.map((itemId) => (
+                      <li key={itemId}>{itemId}</li>
+                    ))}
+                  </ul>
+
+                  {/* Description */}
+                  <p>{synergy.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

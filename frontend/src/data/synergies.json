@@ -3,18 +3,12 @@
     "id": "godhead-brimstone",
     "items": ["godhead", "brimstone"],
     "type": "positive",
-    "description": "Test description for the interaction.",
-    "media": null,
-    "gameVersion": "repentance-plus",
-    "verified": false
+    "description": "Holy laser synergy"
   },
   {
     "id": "godhead-sacred-heart",
     "items": ["godhead", "sacred-heart"],
     "type": "positive",
-    "description": "Test description for the interaction.",
-    "media": null,
-    "gameVersion": "repentance-plus",
-    "verified": false
+    "description": "Massive homing damage"
   }
 ]
