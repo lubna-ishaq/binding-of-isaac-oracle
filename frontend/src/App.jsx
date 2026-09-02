@@ -13,14 +13,23 @@ function App() {
   return (
     <div
       style={{
-        background: "#111",
+        background: "#563224",
         minHeight: "100vh",
         color: "white",
         padding: "20px",
+        
       }}
     >
       {/* Main title */}
-      <h1>ISAAC SYNERGY GRAPH</h1>
+      <h1
+        style={{
+          fontSize: "4rem",
+          color: "#d4af37",
+          textShadow: "0 0 20px rgba(212,175,55,0.6)",
+        }}
+      >
+        ISAAC SYNERGIES GRAPH
+      </h1>
 
       {/* Container for the item buttons */}
       <div
