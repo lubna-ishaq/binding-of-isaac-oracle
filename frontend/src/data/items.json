@@ -1,0 +1,18 @@
+[
+  {
+    "id": "brimstone",
+    "name": "Brimstone",
+    "quality": 4
+  },
+  {
+    "id": "sacred-heart",
+    "name": "Sacred Heart",
+    "quality": 4
+  },
+  {
+  "id": "godhead",
+  "name": "Godhead",
+  "quality": 4
+}
+
+]
