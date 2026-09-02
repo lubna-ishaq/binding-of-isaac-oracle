@@ -1,0 +1,20 @@
+[
+  {
+    "id": "godhead-brimstone",
+    "items": ["godhead", "brimstone"],
+    "type": "positive",
+    "description": "Test description for the interaction.",
+    "media": null,
+    "gameVersion": "repentance-plus",
+    "verified": false
+  },
+  {
+    "id": "godhead-sacred-heart",
+    "items": ["godhead", "sacred-heart"],
+    "type": "positive",
+    "description": "Test description for the interaction.",
+    "media": null,
+    "gameVersion": "repentance-plus",
+    "verified": false
+  }
+]
