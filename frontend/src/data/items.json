@@ -9,10 +9,12 @@
     "name": "Sacred Heart",
     "quality": 4
   },
-  {
+{
   "id": "godhead",
   "name": "Godhead",
-  "quality": 4
+  "quality": 4,
+  "image": "/images/items/godhead.png"
 }
+
 
 ]

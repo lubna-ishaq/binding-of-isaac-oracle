@@ -13,6 +13,7 @@ function ItemPage() {
   const itemSynergies = synergies.filter((synergy) =>
     synergy.items.includes(itemId)
   );
+  
 
   if (!selectedItem) {
     return (
