@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heart Container Kit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#0d0a12; --panel:#16111f; --raise:#251e33;
+  --line:#312845; --line-soft:#241d33;
+  --text:#ece6f5; --muted:#9c8fb5; --dim:#6d6285;
+  --red:#d02b3a; --gold:#f0c33c;
+  --check-a:#191324; --check-b:#1f1830;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--text);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 96px}
+
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.eyebrow{font-family:"Silkscreen","Courier New",monospace;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+h1{font-family:"Silkscreen","Courier New",monospace;font-weight:700;
+  font-size:clamp(26px,4.4vw,44px);line-height:1.15;margin:0;text-wrap:balance}
+h2{font-family:"Silkscreen","Courier New",monospace;font-weight:700;
+  font-size:16px;letter-spacing:.03em;margin:0}
+p{margin:0}
+
+header{padding:56px 0 32px;border-bottom:1px solid var(--line-soft)}
+.lede{max-width:60ch;color:var(--muted);margin-top:14px}
+.lede b{color:var(--text);font-weight:500}
+.banner{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:30px}
+
+section{padding-top:52px}
+.shead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.shead .n{font-family:"Silkscreen",monospace;font-size:11px;color:var(--red)}
+.snote{color:var(--muted);max-width:64ch;margin-bottom:22px;font-size:14px}
+.snote code{color:var(--gold)}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;
+  background:var(--panel);border:1px solid var(--line);padding:14px 18px;
+  margin-bottom:26px;position:sticky;top:0;z-index:20}
+.ctl{display:flex;align-items:center;gap:10px}
+.ctl > .eyebrow{white-space:nowrap}
+input[type=range]{accent-color:var(--red);width:120px}
+.seg{display:flex;border:1px solid var(--line)}
+.seg button{font-family:"Silkscreen",monospace;font-size:10px;letter-spacing:.08em;
+  background:transparent;color:var(--muted);border:0;padding:7px 11px;cursor:pointer}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--red);color:#fff}
+.seg button:focus-visible,.chip:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.val{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--text);
+  min-width:44px;font-variant-numeric:tabular-nums}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:12px 14px 0}
+.card .name{font-family:"Silkscreen",monospace;font-size:12px}
+.card .key{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim)}
+.card .note{padding:3px 14px 0;font-size:12px;line-height:1.45;color:var(--muted);min-height:52px}
+.stage{display:flex;justify-content:center;align-items:flex-end;gap:14px;
+  padding:14px 12px 10px;margin-top:auto;flex-wrap:wrap}
+.slot{display:flex;flex-direction:column;align-items:center;gap:7px}
+.slot .lab{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--dim);letter-spacing:.04em}
+.pad{padding:6px;line-height:0;border:1px solid transparent;position:relative}
+.pad.hit{cursor:pointer}
+.pad.hit:hover{border-color:var(--line)}
+.pad:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.pad .over{position:absolute;inset:6px;line-height:0}
+.bg-check .pad{background-image:
+    linear-gradient(45deg,var(--check-b) 25%,transparent 25%),
+    linear-gradient(-45deg,var(--check-b) 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,var(--check-b) 75%),
+    linear-gradient(-45deg,transparent 75%,var(--check-b) 75%);
+  background-size:12px 12px;background-position:0 0,0 6px,6px -6px,-6px 0;
+  background-color:var(--check-a)}
+.bg-dark .pad{background:#0a0710}
+.bg-light .pad{background:#efeaf5}
+.bg-game .pad{background:#3f2f2a}
+
+.play{background:var(--panel);border:1px solid var(--line);padding:22px}
+.hprow{display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:56px}
+.hprow .pad{padding:2px}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.chip{font-family:"Silkscreen",monospace;font-size:10px;letter-spacing:.06em;
+  background:var(--raise);color:var(--text);border:1px solid var(--line);
+  padding:8px 13px;cursor:pointer}
+.chip:hover{border-color:var(--red)}
+.chip.ghost{background:transparent;color:var(--muted)}
+.readout{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+  margin-top:14px;font-variant-numeric:tabular-nums}
+.readout b{color:var(--gold);font-weight:500}
+.hint{font-size:12.5px;color:var(--dim);margin-top:8px}
+
+.codewrap{position:relative;border:1px solid var(--line);background:#100c18}
+pre{margin:0;overflow-x:auto;padding:16px 18px;font-family:"IBM Plex Mono",monospace;
+  font-size:12.5px;line-height:1.7;color:#cfc6e0}
+pre .c{color:#6d6285} pre .t{color:var(--gold)} pre .s{color:#8fd08a} pre .a{color:#7fa8f0}
+.copy{position:absolute;top:8px;right:8px;font-family:"Silkscreen",monospace;font-size:9px;
+  letter-spacing:.08em;background:var(--raise);color:var(--muted);
+  border:1px solid var(--line);padding:6px 9px;cursor:pointer}
+.copy:hover{color:var(--text);border-color:var(--red)}
+
+.spec{width:100%;border-collapse:collapse;font-size:13.5px}
+.spec th{text-align:left;font-family:"Silkscreen",monospace;font-size:10px;letter-spacing:.1em;
+  color:var(--dim);font-weight:400;padding:0 14px 8px 0;border-bottom:1px solid var(--line)}
+.spec td{padding:9px 14px 9px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.spec td:first-child{font-family:"IBM Plex Mono",monospace;color:var(--gold);white-space:nowrap}
+.spec td.m{font-family:"IBM Plex Mono",monospace;color:var(--muted);font-size:12px;white-space:nowrap}
+.spec td.no{color:var(--dim)}
+.tblwrap{overflow-x:auto}
+.files{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);
+  background:var(--panel);border:1px solid var(--line);padding:16px 18px;line-height:1.9}
+.files b{color:var(--text);font-weight:500}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line-soft);
+  color:var(--dim);font-size:12.5px;max-width:66ch}
+@media (prefers-reduced-motion:no-preference){
+  .pad.hit{transition:border-color .12s}
+  .chip{transition:border-color .12s,color .12s}
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">16 &times; 16 px &middot; 10 Typen &middot; 16 Sprites</div>
+  <h1>Heart Container Kit</h1>
+  <p class="lede">Pixel-Herzen f&uuml;r dein React-Projekt &mdash; als <b>SVG-Komponente</b>,
+  die sich per Prop f&uuml;llen, umf&auml;rben und animieren l&auml;sst, und als
+  <b>PNG-Set</b> in vier Aufl&ouml;sungen. Jeder Typ hat nur die Zust&auml;nde, die es
+  wirklich gibt: ein leeres Seelenherz zeichnet die Komponente gar nicht erst.</p>
+  <div class="banner" id="banner"></div>
+</header>
+
+<section>
+  <div class="shead"><span class="n">01</span><h2>Alle Typen</h2></div>
+  <p class="snote">Jede Kachel zeigt genau die Zust&auml;nde, die der Typ hat. Ein Klick
+  schaltet durch. Halbe Herzen trennen bei Spalte&nbsp;7 des Rasters &mdash; harte Kante,
+  kein Verlauf.</p>
+
+  <div class="controls">
+    <div class="ctl"><span class="eyebrow">Gr&ouml;&szlig;e</span>
+      <input type="range" id="size" min="16" max="96" step="1" value="48">
+      <span class="val" id="sizeval">48px</span></div>
+    <div class="ctl"><span class="eyebrow">Hintergrund</span>
+      <div class="seg" id="bgseg">
+        <button data-bg="check" aria-pressed="true">Alpha</button>
+        <button data-bg="dark" aria-pressed="false">Dunkel</button>
+        <button data-bg="light" aria-pressed="false">Hell</button>
+        <button data-bg="game" aria-pressed="false">Keller</button>
+      </div></div>
+    <div class="ctl"><span class="eyebrow">Raster</span>
+      <div class="seg" id="gridseg">
+        <button data-grid="0" aria-pressed="true">Aus</button>
+        <button data-grid="1" aria-pressed="false">An</button>
+      </div></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</section>
+
+<section>
+  <div class="shead"><span class="n">02</span><h2>Lebensleiste</h2></div>
+  <p class="snote"><code>hp</code> z&auml;hlt in halben Herzen, genau wie im Spiel:
+  aus <code>hp=5</code> werden zwei volle und ein halbes. Klick auf ein Herz setzt
+  die Leiste auf diesen Stand.</p>
+  <div class="play">
+    <div class="hprow" id="hprow"></div>
+    <div class="btns">
+      <button class="chip" data-hp="-1">&minus; Schaden</button>
+      <button class="chip" data-hp="1">+ Heilen</button>
+      <button class="chip ghost" data-hp="full">Voll</button>
+      <button class="chip ghost" data-hp="0">Leer</button>
+      <div class="seg" id="hptype" style="margin-left:auto"></div>
+    </div>
+    <div class="readout" id="hpread"></div>
+    <p class="hint" id="hphint"></p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="n">03</span><h2>Benutzung</h2></div>
+  <p class="snote">Eine Datei, keine Abh&auml;ngigkeiten au&szlig;er React &mdash;
+  die Pixeldaten stecken lauflängen&shy;kodiert in der Komponente.</p>
+  <div class="codewrap">
+    <button class="copy" data-copy="snippet">Kopieren</button>
+    <pre id="snippet"><span class="c">// PixelHeart.jsx ins Projekt kopieren</span>
+<span class="t">import</span> PixelHeart, { HeartRow, STATES_BY_TYPE } <span class="t">from</span> <span class="s">"./PixelHeart"</span>;
+
+<span class="c">// fester Zustand</span>
+&lt;PixelHeart <span class="a">type</span>=<span class="s">"red"</span> <span class="a">state</span>=<span class="s">"half"</span> <span class="a">size</span>={48} /&gt;
+
+<span class="c">// Anteil 0..1 -- wird auf einen Zustand gerundet, den der Typ hat</span>
+&lt;PixelHeart <span class="a">type</span>=<span class="s">"soul"</span> <span class="a">ratio</span>={hp / maxHp} /&gt;
+
+<span class="c">// klickbar: schaltet nur durch die gueltigen Zustaende</span>
+&lt;PixelHeart <span class="a">type</span>=<span class="s">"black"</span> <span class="a">interactive</span> <span class="a">onChange</span>={s =&gt; setState(s)} /&gt;
+
+<span class="c">// Palette punktuell ueberschreiben</span>
+&lt;PixelHeart <span class="a">type</span>=<span class="s">"red"</span> <span class="a">colors</span>={{ base: <span class="s">"#ff2e88"</span>, hi: <span class="s">"#ffa8cf"</span> }} /&gt;
+
+<span class="c">// Gold ist ein Rahmen -- innen transparent, also drueberlegen</span>
+&lt;<span class="t">div</span> <span class="a">style</span>={{ position: <span class="s">"relative"</span> }}&gt;
+  &lt;PixelHeart <span class="a">type</span>=<span class="s">"red"</span> <span class="a">state</span>=<span class="s">"full"</span> <span class="a">size</span>={48} /&gt;
+  &lt;PixelHeart <span class="a">type</span>=<span class="s">"gold"</span> <span class="a">size</span>={48} <span class="a">style</span>={{ position: <span class="s">"absolute"</span>, inset: 0 }} /&gt;
+&lt;/<span class="t">div</span>&gt;
+
+<span class="c">// ganze Leiste, hp in halben Herzen</span>
+&lt;HeartRow <span class="a">hp</span>={5} <span class="a">max</span>={12} <span class="a">type</span>=<span class="s">"red"</span> <span class="a">size</span>={40} /&gt;</pre>
+  </div>
+
+  <div style="height:26px"></div>
+  <div class="tblwrap"><table class="spec">
+    <thead><tr><th>Prop</th><th>Typ</th><th>Bedeutung</th></tr></thead>
+    <tbody>
+      <tr><td>type</td><td class="m">Typ-Key</td><td>einer der 10 Typen, Default <code class="mono">"red"</code></td></tr>
+      <tr><td>state</td><td class="m">full&nbsp;|&nbsp;half&nbsp;|&nbsp;empty</td><td>gibt es den Zustand f&uuml;r den Typ nicht, wird nichts gezeichnet</td></tr>
+      <tr><td>ratio</td><td class="m">0&hellip;1</td><td>wird auf den n&auml;chstbesten g&uuml;ltigen Zustand gerundet</td></tr>
+      <tr><td>size</td><td class="m">number</td><td>Kantenl&auml;nge in px, Default 32 &mdash; auch krumme Werte bleiben scharf</td></tr>
+      <tr><td>interactive</td><td class="m">boolean</td><td>Klick schaltet durch die g&uuml;ltigen Zust&auml;nde</td></tr>
+      <tr><td>onChange</td><td class="m">(state) =&gt; void</td><td>Callback beim Umschalten</td></tr>
+      <tr><td>colors</td><td class="m">object</td><td>&uuml;berschreibt <code class="mono">base</code>, <code class="mono">shade</code>, <code class="mono">hi</code>, <code class="mono">outline</code>, <code class="mono">empty*</code> &hellip;</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="shead"><span class="n">04</span><h2>Zust&auml;nde je Typ</h2></div>
+  <p class="snote">Zur Laufzeit steht dieselbe Tabelle als
+  <code>STATES_BY_TYPE</code> bereit, plus <code>hasState(type, state)</code>.</p>
+  <div class="tblwrap"><table class="spec" id="stateTable">
+    <thead><tr><th>Typ</th><th>Key</th><th>Full</th><th>Half</th><th>Empty</th><th>Anmerkung</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="shead"><span class="n">05</span><h2>Im Paket</h2></div>
+  <p class="snote">Die PNGs liegen in vier Aufl&ouml;sungen bereit, falls du lieber
+  Bilddateien einbindest. Beim Skalieren <code>image-rendering: pixelated</code> setzen &mdash;
+  sonst verw&auml;scht der Browser die Kanten. Die Wrapper tun das schon.</p>
+  <div class="files">
+    <b>react/PixelHeart.jsx</b> &nbsp; SVG-Komponente + HeartRow<br>
+    <b>react/SpriteHeart.jsx</b> &nbsp; PNG- und Spritesheet-Wrapper<br>
+    <b>png/1x &middot; 2x &middot; 4x &middot; 8x</b> &nbsp; 64 Bilder, <span style="color:var(--dim)">&lt;typ&gt;-&lt;zustand&gt;.png</span><br>
+    <b>hearts-spritesheet.png</b> &nbsp; 192&times;640, Kachel 64&times;64<br>
+    <b>hearts-spritesheet.json</b> &nbsp; Frame-Koordinaten<br>
+    <b>heart-data.json</b> &nbsp; Geometrie + Paletten f&uuml;r Canvas, WebGL, Unity &hellip;<br>
+    <b>README.md</b>
+  </div>
+</section>
+
+<footer>
+  Eigenes Artwork im Retro-Stil &mdash; die Formen und Paletten sind neu gezeichnet, keine
+  Original-Sprites aus dem Spiel. Damit kannst du das Set frei einsetzen, auch wenn du dein
+  Projekt sp&auml;ter ver&ouml;ffentlichst.
+</footer>
+</div>
+
+<script>
+const DATA = {"size":16,"shapes":{"heart":{"outline":"1:2-6,9-13;2:1-2,6-9,13-14;3:0-1,7-8,14-15;4:0,15;5:0,15;6:0,15;7:0-1,14-15;8:1,14;9:1-2,13-14;10:2-3,12-13;11:3-4,11-12;12:4-5,10-11;13:5-6,9-10;14:6-9","base":"2:3-5,10-11;3:2,5-6,9-12;4:1,4-13;5:1,3-13;6:2-12;7:2-11;8:3-11;9:4-10;10:5-9;11:6-9;12:7-8","shade":"2:12;3:13;4:14;5:14;6:1,13-14;7:12-13;8:2,12-13;9:3,11-12;10:4,10-11;11:5,10;12:6,9;13:7-8","hi":"3:3-4;4:2-3;5:2","rim":"2:3-5,10-12;3:2,6,9,13;4:1,7-8,14;5:1,14;6:1,14;7:2,13;8:2,13;9:3,12;10:4,11;11:5,10;12:6,9;13:7-8","left":"2:3-5;3:2-6;4:1-7;5:1-7;6:1-7;7:2-7;8:2-7;9:3-7;10:4-7;11:5-7;12:6-7;13:7","mid":7},"cross":{"outline":"1:5-10;2:5,10;3:5,10;4:5,10;5:1-5,10-14;6:1,14;7:1,14;8:1,14;9:1,14;10:1-5,10-14;11:5,10;12:5,10;13:5,10;14:5-10","base":"2:8;3:7-8;4:6-8;5:6-8;6:4-12;7:3-12;8:2-12;9:6-9;10:6-8;11:6-8;12:6-8","shade":"2:9;3:9;4:9;5:9;6:13;7:13;8:13;9:2-5,10-13;10:9;11:9;12:9;13:6-9","hi":"2:6-7;3:6;6:2-3;7:2","rim":"2:6-9;3:6,9;4:6,9;5:6,9;6:2-5,10-13;7:2,13;8:2,13;9:2-5,10-13;10:6,9;11:6,9;12:6,9;13:6-9","left":"2:6-7;3:6-7;4:6-7;5:6-7;6:2-7;7:2-7;8:2-7;9:2-7;10:6-7;11:6-7;12:6-7;13:6-7","mid":7}},"palettes":{"red":{"base":"#d02b3a","shade":"#8f1524","hi":"#ff7d88","outline":"#1e0a0f","emptyBase":"#3a1522","emptyShade":"#27101d","emptyHi":"#572e3a","states":["full","half","empty"],"shape":"heart","mode":"solid","label":"Red Heart"},"bone":{"base":"#e8e2cc","shade":"#aaa184","hi":"#fffaf0","outline":"#2b2618","emptyBase":"#3f393f","emptyShade":"#2b252c","emptyHi":"#575157","states":["full","half","empty"],"shape":"heart","mode":"solid","label":"Bone Heart","marks":"#8d8265","pits":"#5d5540"},"gold":{"base":"#f0c33c","shade":"#b1802a","hi":"#fff4b3","outline":"#4a3405","emptyBase":"#413322","emptyShade":"#2c201e","emptyHi":"#574f46","states":["full"],"shape":"heart","mode":"frame","label":"Gold Heart","rim":"#f5cf55"},"blended":{"base":"#d02b3a","shade":"#8f1524","hi":"#ff7d88","outline":"#1e0a0f","emptyBase":"#3a1522","emptyShade":"#27101d","emptyHi":"#572e3a","states":["full"],"shape":"heart","mode":"solid","label":"Blended Heart","altBase":"#4f86e8","altShade":"#2f56a8","altHi":"#bfe0ff"},"rotten":{"base":"#7f9a3a","shade":"#4e6224","hi":"#c3d97a","outline":"#1b220f","emptyBase":"#2a2b22","emptyShade":"#1e1b1d","emptyHi":"#464836","states":["half"],"shape":"heart","mode":"solid","label":"Rotten Heart","marks":"#3c4a1c"},"soul":{"base":"#4f86e8","shade":"#2f56a8","hi":"#bfe0ff","outline":"#101a33","emptyBase":"#212745","emptyShade":"#191a31","emptyHi":"#454a5c","states":["full","half"],"shape":"heart","mode":"solid","label":"Soul Heart"},"black":{"base":"#5d4d80","shade":"#332950","hi":"#a996d6","outline":"#120e1e","emptyBase":"#231b30","emptyShade":"#1a1324","emptyHi":"#3e3550","states":["full","half"],"shape":"heart","mode":"solid","label":"Black Heart"},"eternal":{"base":"#dfe9f2","shade":"#a3b4c6","hi":"#ffffff","outline":"#27303c","emptyBase":"#3d3b47","emptyShade":"#2a2836","emptyHi":"#57525c","states":["half"],"shape":"heart","mode":"solid","label":"Eternal Heart"},"broken":{"base":"#6b6b73","shade":"#43434a","hi":"#a9a9b3","outline":"#15151a","emptyBase":"#26212d","emptyShade":"#1c1723","emptyHi":"#3e3a46","states":["full"],"shape":"heart","mode":"solid","label":"Broken Heart","crack":"#15151a"},"holy":{"base":"#5aa0f0","shade":"#2f63b8","hi":"#d3e8ff","outline":"#0f1f3d","emptyBase":"#232c46","emptyShade":"#191c33","emptyHi":"#4a4c5c","states":["full"],"shape":"cross","mode":"solid","label":"Holy Mantle"}},"order":["red","bone","gold","blended","rotten","soul","black","eternal","broken","holy"],"details":{"boneRibs":"6:5-6,8-9;8:4-6,8-10;10:5-6,8-9","boneSternum":"5:7;6:7;7:7;8:7;9:7;10:7;11:7","bonePits":"","rotMarks":"5:2-3;6:3;7:2;8:4-5;9:4;11:6","crack":"4:7;5:8;6:9;7:8;8:8;9:7;10:8;11:7;12:7"}};
+const SIZE = DATA.size, PAL = DATA.palettes, ORDER = DATA.order;
+const STATES_BY_TYPE = Object.fromEntries(ORDER.map(t => [t, PAL[t].states]));
+
+const NOTES = {
+  red:"Der Standard-Container. Einziger Typ mit allen drei Zust&auml;nden.",
+  bone:"Rippenbogen und Brustbein als eigene Ebene.",
+  gold:"Nur der &auml;u&szlig;ere Rahmen, innen transparent &mdash; leg ihn &uuml;ber ein rotes Herz. Zerbricht beim ersten Treffer, deshalb kein half oder empty.",
+  blended:"Links rot, rechts blau. Gibt es nur ganz.",
+  rotten:"Belegt einen halben Platz &mdash; ein volles Rotten Heart gibt es nicht.",
+  soul:"Voll oder halb. Eine leere Seelenherz-H&uuml;lle gibt es nicht.",
+  black:"Wie Soul, nur dunkel. Ebenfalls kein empty.",
+  eternal:"Existiert nur als halbes Herz.",
+  broken:"Riss durch die Mitte. Nur ganz.",
+  holy:"Kein Herz, sondern das blaue Kreuz des Schilds."
+};
+const TABLE_NOTE = {
+  red:"voller Container", bone:"voller Container",
+  gold:"Overlay-Rahmen, zerbricht sofort",
+  blended:"Pickup, kein Container-Zustand",
+  rotten:"belegt einen halben Platz",
+  soul:"Schild vor den Containern", black:"wie Soul",
+  eternal:"nur halb", broken:"nur ganz", holy:"Kreuz-Sprite"
+};
+
+function expand(rle){const o=[];if(!rle)return o;
+  for(const part of rle.split(";")){const [ys,runs]=part.split(":");const y=+ys;
+    for(const r of runs.split(",")){const d=r.indexOf("-");
+      const lo=d<0?+r:+r.slice(0,d), hi=d<0?lo:+r.slice(d+1);
+      for(let x=lo;x<=hi;x++)o.push([x,y]);}}
+  return o;}
+
+const SH=Object.fromEntries(Object.entries(DATA.shapes).map(([n,s])=>[n,{
+  outline:expand(s.outline), base:expand(s.base), shade:expand(s.shade), hi:expand(s.hi),
+  rim:new Set(expand(s.rim).map(p=>p[0]+","+p[1])),
+  left:new Set(expand(s.left).map(p=>p[0]+","+p[1])), mid:s.mid}]));
+const D=Object.fromEntries(Object.entries(DATA.details).map(([k,v])=>[k,expand(v)]));
+
+function buildPixels(type,state){
+  const p=PAL[type]||PAL.red, s=SH[p.shape]||SH.heart;
+  const m=new Map(), put=([x,y],c)=>m.set(y*SIZE+x,c);
+
+  if(p.mode==="frame"){
+    for(const pt of s.outline)put(pt,p.outline);
+    for(const k of ["base","shade","hi"])
+      for(const pt of s[k])if(s.rim.has(pt[0]+","+pt[1]))put(pt,p.rim);
+    for(const pt of s.hi)if(s.rim.has(pt[0]+","+pt[1]))put(pt,p.hi);
+    return m;}
+
+  const lit=([x,y])=>state==="full"?true:state==="empty"?false:s.left.has(x+","+y);
+  for(const pt of s.outline)put(pt,p.outline);
+  for(const [k,e] of [["base","emptyBase"],["shade","emptyShade"],["hi","emptyHi"]]){
+    for(const pt of s[k]){
+      const on=lit(pt), alt=type==="blended"&&!s.left.has(pt[0]+","+pt[1]);
+      const cap=k.charAt(0).toUpperCase()+k.slice(1);
+      const norm=(alt&&p["alt"+cap])?p["alt"+cap]:p[k];
+      put(pt,on?norm:p[e]);}}
+  const det=(pts,c,onlyLit=true)=>{if(!c)return;for(const pt of pts)if(!onlyLit||lit(pt))put(pt,c);};
+  if(type==="bone"){det(D.boneRibs,p.marks);det(D.boneSternum,p.marks);}
+  if(type==="rotten")det(D.rotMarks,p.marks);
+  if(type==="broken")det(D.crack,p.crack,false);
+  return m;}
+
+function toRects(m){const r=[];
+  for(let y=0;y<SIZE;y++){let x=0;
+    while(x<SIZE){const c=m.get(y*SIZE+x);if(!c){x++;continue;}
+      let w=1;while(x+w<SIZE&&m.get(y*SIZE+x+w)===c)w++;
+      r.push([x,y,w,c]);x+=w;}}
+  return r;}
+
+const cache=new Map();
+function rectsFor(t,s){const k=t+"|"+s;let r=cache.get(k);
+  if(!r){r=toRects(buildPixels(t,s));cache.set(k,r);}return r;}
+
+let showGrid=false;
+function svgFor(type,state,size){
+  let body=rectsFor(type,state).map(([x,y,w,c])=>
+    `<rect x="${x}" y="${y}" width="${w}" height="1" fill="${c}"/>`).join("");
+  if(showGrid){
+    let g="";
+    for(let i=1;i<SIZE;i++)
+      g+=`<line x1="${i}" y1="0" x2="${i}" y2="${SIZE}"/><line x1="0" y1="${i}" x2="${SIZE}" y2="${i}"/>`;
+    const mid=(SH[PAL[type].shape]||SH.heart).mid;
+    body+=`<g stroke="#f0c33c" stroke-width="0.05" opacity="0.5">${g}</g>`
+       +`<line x1="${mid+1}" y1="0" x2="${mid+1}" y2="${SIZE}" stroke="#d02b3a" stroke-width="0.14" opacity="0.9"/>`;}
+  return `<svg viewBox="0 0 ${SIZE} ${SIZE}" width="${size}" height="${size}" shape-rendering="crispEdges" role="img" aria-label="${type} ${state}">${body}</svg>`;}
+
+function blank(size){return `<svg viewBox="0 0 ${SIZE} ${SIZE}" width="${size}" height="${size}" aria-hidden="true"></svg>`;}
+
+/* ---------- Banner ---------- */
+function paintBanner(){
+  const set=[["red","full"],["red","half"],["red","empty"],["bone","full"],["soul","full"],
+             ["soul","half"],["black","full"],["eternal","half"],["rotten","half"],
+             ["blended","full"],["broken","full"],["gold","full"],["holy","full"]];
+  document.getElementById("banner").innerHTML=
+    set.map(([t,s])=>`<span style="line-height:0">${svgFor(t,s,38)}</span>`).join("");}
+
+/* ---------- Typ-Raster ---------- */
+let size=48;
+const cellState={};
+ORDER.forEach(t=>STATES_BY_TYPE[t].forEach(s=>cellState[t+"|"+s]=s));
+
+function slotHTML(t,s){
+  const cur=cellState[t+"|"+s];
+  const multi=STATES_BY_TYPE[t].length>1;
+  const inner=(t==="gold")
+    ? `${svgFor("red","full",size)}<span class="over">${svgFor("gold","full",size)}</span>`
+    : svgFor(t,cur,size);
+  return `<div class="slot">
+    <div class="pad${multi?" hit":""}" ${multi?'tabindex="0" role="button"':""}
+         data-t="${t}" data-s="${s}"
+         aria-label="${PAL[t].label}, ${cur}${multi?", klicken zum Umschalten":""}">${inner}</div>
+    <span class="lab">${t==="gold"?"&uuml;ber Rot":cur}</span></div>`;}
+
+function paintGrid(){
+  document.getElementById("grid").innerHTML=ORDER.map(t=>{
+    let slots=STATES_BY_TYPE[t].map(s=>slotHTML(t,s)).join("");
+    if(t==="gold")
+      slots=`<div class="slot"><div class="pad">${svgFor("gold","full",size)}</div>
+             <span class="lab">frame</span></div>`+slots;
+    return `<article class="card">
+      <div class="top"><span class="name">${PAL[t].label}</span><span class="key">${t}</span></div>
+      <div class="note">${NOTES[t]||""}</div>
+      <div class="stage">${slots}</div></article>`;}).join("");}
+
+function cycle(pad){
+  const t=pad.dataset.t, av=STATES_BY_TYPE[t];
+  if(av.length<2)return;
+  const k=t+"|"+pad.dataset.s;
+  cellState[k]=av[(av.indexOf(cellState[k])+1)%av.length];
+  paintGrid();}
+
+document.addEventListener("click",e=>{
+  const pad=e.target.closest(".pad.hit[data-t]"); if(pad)cycle(pad);});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"&&e.key!==" ")return;
+  const pad=e.target.closest(".pad.hit[data-t]"); if(!pad)return;
+  e.preventDefault(); cycle(pad);});
+
+/* ---------- Steuerung ---------- */
+const sizeEl=document.getElementById("size");
+sizeEl.addEventListener("input",()=>{
+  size=+sizeEl.value;
+  document.getElementById("sizeval").textContent=size+"px";
+  paintGrid();});
+document.getElementById("bgseg").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-bg]"); if(!b)return;
+  document.querySelectorAll("#bgseg button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  document.getElementById("grid").className="grid bg-"+b.dataset.bg;});
+document.getElementById("gridseg").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-grid]"); if(!b)return;
+  document.querySelectorAll("#gridseg button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  showGrid=b.dataset.grid==="1"; cache.clear(); paintGrid(); paintBanner();});
+
+/* ---------- Lebensleiste ---------- */
+let hp=9, maxHp=12, hpType="red";
+function paintHp(){
+  const av=STATES_BY_TYPE[hpType], showsEmpty=av.includes("empty");
+  const slots=showsEmpty?Math.ceil(maxHp/2):Math.ceil(Math.min(hp,maxHp)/2);
+  let out="";
+  for(let i=0;i<slots;i++){
+    const left=hp-i*2;
+    const st=left>=2?"full":left===1?"half":"empty";
+    out+=`<div class="pad hit" tabindex="0" role="button" data-i="${i}"
+      aria-label="Leben auf ${(i+1)*2} setzen">${av.includes(st)?svgFor(hpType,st,44):blank(44)}</div>`;}
+  document.getElementById("hprow").innerHTML=out||`<span style="color:var(--dim);font-size:13px">nichts zu zeichnen &mdash; hp = 0</span>`;
+  document.getElementById("hpread").innerHTML=
+    `hp = <b>${hp}</b> / ${maxHp} &nbsp;&rarr;&nbsp; &lt;HeartRow hp={<b>${hp}</b>} max={${maxHp}} type="${hpType}" /&gt;`;
+  document.getElementById("hphint").innerHTML= showsEmpty
+    ? `<code class="mono">${hpType}</code> hat einen empty-Zustand &mdash; leere Pl&auml;tze bleiben als H&uuml;lle stehen.`
+    : `<code class="mono">${hpType}</code> hat kein empty &mdash; die Leiste wird k&uuml;rzer, statt leere H&uuml;llen zu zeichnen.`;}
+
+document.getElementById("hprow").addEventListener("click",e=>{
+  const p=e.target.closest(".pad[data-i]"); if(!p)return;
+  const target=(+p.dataset.i+1)*2;
+  hp=(hp===target)?target-1:target; paintHp();});
+document.getElementById("hprow").addEventListener("keydown",e=>{
+  if(e.key!=="Enter"&&e.key!==" ")return;
+  const p=e.target.closest(".pad[data-i]"); if(!p)return;
+  e.preventDefault(); hp=(+p.dataset.i+1)*2; paintHp();});
+document.querySelectorAll("[data-hp]").forEach(b=>b.addEventListener("click",()=>{
+  const v=b.dataset.hp;
+  if(v==="full")hp=maxHp; else if(v==="0")hp=0;
+  else hp=Math.max(0,Math.min(maxHp,hp+ +v));
+  paintHp();}));
+
+const seg=document.getElementById("hptype");
+seg.innerHTML=["red","bone","soul","black"].map(t=>
+  `<button data-ht="${t}" aria-pressed="${t==="red"}">${t}</button>`).join("");
+seg.addEventListener("click",e=>{
+  const b=e.target.closest("button[data-ht]"); if(!b)return;
+  seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  hpType=b.dataset.ht; paintHp();});
+
+/* ---------- Zustandstabelle ---------- */
+document.querySelector("#stateTable tbody").innerHTML=ORDER.map(t=>{
+  const av=STATES_BY_TYPE[t];
+  const cell=s=>av.includes(s)?'<td class="m" style="color:#8fd08a">ja</td>':'<td class="no">&mdash;</td>';
+  return `<tr><td>${PAL[t].label}</td><td class="m">${t}</td>
+    ${cell("full")}${cell("half")}${cell("empty")}
+    <td style="white-space:normal">${TABLE_NOTE[t]||""}</td></tr>`;}).join("");
+
+/* ---------- Kopieren ---------- */
+document.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",async()=>{
+  try{await navigator.clipboard.writeText(document.getElementById(b.dataset.copy).innerText);
+      b.textContent="Kopiert";}
+  catch{b.textContent="Strg+C";}
+  setTimeout(()=>b.textContent="Kopieren",1600);}));
+
+paintBanner(); paintGrid(); paintHp();
+document.getElementById("grid").className="grid bg-check";
+</script>
+
+</body>
+</html>
