@@ -1,2 +1,2 @@
-# isaac-synergy-graph
-Interactive graph visualization of Binding of Isaac item synergies.
+# isaac-oracle
+Interactive visualization of Binding of Isaac oracle
