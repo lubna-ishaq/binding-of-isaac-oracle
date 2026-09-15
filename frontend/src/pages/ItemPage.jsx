@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
+import ItemImage from "../components/ItemImage";
 import items from "../data/items.generated.json";
 
 function ItemPage() {
@@ -11,19 +12,17 @@ function ItemPage() {
 
   if (!selectedItem) {
     return (
-      <div>
-        <h1>Item not found</h1>
+      <main style={{ minHeight: "100vh", padding: "20px" }}>
+        <h1 className="page-title">Item not found</h1>
 
-        <Link to="/">Back</Link>
-      </div>
+        <p style={{ margin: "20px 0" }}>
+          There is no item with the ID "{itemId}".
+        </p>
+
+        <Link to="/">← Back to all items</Link>
+      </main>
     );
   }
-
-  const imageUrl = selectedItem.imageSource
-    ? selectedItem.imageSource.startsWith("/")
-      ? `https://bindingofisaacrebirth.wiki.gg${selectedItem.imageSource}`
-      : selectedItem.imageSource
-    : selectedItem.image;
 
   return (
     <div
@@ -43,22 +42,16 @@ function ItemPage() {
         ← Back
       </Link>
 
-      <img
-        src={imageUrl}
-        alt={selectedItem.name}
-        style={{
-          display: "block",
-          width: "120px",
-          height: "120px",
-          objectFit: "contain",
-          margin: "30px auto 10px",
-        }}
+      <ItemImage
+        item={selectedItem}
+        size={120}
+        style={{ display: "flex", margin: "30px auto 10px" }}
       />
 
       <h1
         style={{
           textAlign: "center",
-          fontSize: "4rem",
+          fontSize: "clamp(2.2rem, 7vw, 4rem)",
           color: "#fff",
           margin: "0 0 34px",
         }}
@@ -165,7 +158,7 @@ function ItemPage() {
             Type
           </h3>
 
-          <p>{selectedItem.type}</p>
+          <p style={{ textTransform: "capitalize" }}>{selectedItem.type}</p>
         </div>
       </div>
     </div>

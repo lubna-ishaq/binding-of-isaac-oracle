@@ -1,16 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ItemImage from "../components/ItemImage";
 import items from "../data/items.generated.json";
-
-function getImageUrl(item) {
-  if (!item.imageSource) {
-    return item.image;
-  }
-
-  return item.imageSource.startsWith("/")
-    ? `https://bindingofisaacrebirth.wiki.gg${item.imageSource}`
-    : item.imageSource;
-}
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -73,69 +64,27 @@ function HomePage() {
         minHeight: "100vh",
         color: "white",
         padding: "20px",
-        position: "relative",
       }}
     >
-      <Link
-        to="/compare"
-        style={{
-          position: "absolute",
-          top: "20px",
-          left: "20px",
-          padding: "10px 14px",
-          background: "#222",
-          color: "#d4af37",
-          border: "1px solid #d4af37",
-          borderRadius: "8px",
-          fontWeight: "bold",
-        }}
-      >
-        Compare Items
-      </Link>
+      <header className="home-header">
+        <nav className="home-nav" aria-label="Main">
+          <Link to="/compare">Compare Items</Link>
+          <Link to="/coach">AI Coach (preview)</Link>
+        </nav>
 
-      <Link
-        to="/coach"
-        style={{
-          position: "absolute",
-          top: "68px",
-          left: "20px",
-          padding: "10px 14px",
-          background: "#222",
-          color: "#d4af37",
-          border: "1px solid #d4af37",
-          borderRadius: "8px",
-          fontWeight: "bold",
-        }}
-      >
-        AI Coach
-      </Link>
+        <h1 className="page-title">THE ISAAC ORACLE</h1>
 
-      <img
-        src="/images/isaac.gif"
-        alt="Dancing Isaac"
-        style={{
-          position: "absolute",
-          top: "15px",
-          right: "80px",
-          width: "120px",
-          zIndex: 1000,
-          opacity: 1,
-        }}
-      />
-
-      <h1
-        style={{
-          textAlign: "center",
-          fontSize: "4rem",
-          color: "#d4af37",
-        }}
-      >
-        THE ISAAC ORACLE
-      </h1>
+        <img
+          src={`${import.meta.env.BASE_URL}images/isaac.gif`}
+          alt=""
+          className="home-mascot"
+        />
+      </header>
 
       <input
         type="text"
         placeholder="Search items..."
+        aria-label="Search items"
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
         style={{
@@ -310,7 +259,8 @@ function HomePage() {
                 to={`/item/${item.id}`}
               style={{
                   width: "180px",
-                  height: "80px",
+                  minHeight: "80px",
+                  padding: "8px",
                   background: "#222",
                   color: "white",
                   border: "2px solid #444",
@@ -327,7 +277,8 @@ function HomePage() {
                   style={{
                     margin: 0,
                     color: "#d4af37",
-                    fontSize: "1.2rem",
+                    fontSize: "1.1rem",
+                    lineHeight: 1.15,
                   }}
                 >
                   {item.name}
@@ -373,15 +324,7 @@ function HomePage() {
                     boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
                   }}
                 >
-                  <img
-                    src={getImageUrl(item)}
-                    alt={item.name}
-                    style={{
-                      width: "72px",
-                      height: "72px",
-                      objectFit: "contain",
-                    }}
-                  />
+                  <ItemImage item={item} size={72} />
                 </Link>
 
                 {hoveredItemId === item.id && (

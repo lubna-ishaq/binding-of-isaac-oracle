@@ -116,6 +116,12 @@ function CoachPage() {
         ISAAC AI COACH
       </h1>
 
+      <p className="preview-banner" role="note">
+        Preview: the build input and health system work, but the analysis
+        below is still a placeholder. Real synergy detection and screenshot
+        recognition are in development.
+      </p>
+
       <div style={tabContainerStyle} role="tablist" aria-label="Build input">
         {[
           ["items", "Choose Items"],

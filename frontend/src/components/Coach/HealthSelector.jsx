@@ -7,8 +7,9 @@ import {
   incrementWholeHeart,
   removeBoneHeart,
   renderHalfHeartSequence,
+  createHealthSummary,
+  hasConfiguredHealth,
 } from "../../utils/healthUtils";
-import { createHealthSummary, hasConfiguredHealth } from "../../utils/healthUtils";
 
 function HealthSelector({ health, setHealth }) {
   function updateHalfHeart(key, amount) {
@@ -113,7 +114,7 @@ function HealthSelector({ health, setHealth }) {
           </ul>
         )}
         <button type="button" onClick={() => setHealth(createEmptyHealth())} title="Reset health" style={{ ...buttonStyle, marginTop: "14px" }}>
-          Refresh Health
+          Reset Health
         </button>
       </div>
     </section>
@@ -136,6 +137,11 @@ function HalfHeartGroup({ label, units, assets, onChange }) {
             </button>
           ))}
         </div>
+        {units > 0 && (
+          <button type="button" onClick={() => onChange(-1)} aria-label={`Remove half ${label} heart`} title="Remove half a heart" style={minusButtonStyle}>
+            -
+          </button>
+        )}
       </div>
       <span style={{ color: "#bbb" }}>{units / 2} hearts</span>
     </div>
@@ -205,6 +211,7 @@ const exampleButtonStyle = {
   marginRight: "6px",
   lineHeight: 0,
 };
+const minusButtonStyle = { padding: "2px 10px", border: "1px solid #9b4b4b", borderRadius: "6px", background: "transparent", color: "#e58b8b", fontWeight: "bold", cursor: "pointer" };
 const boneStyle = { position: "relative", display: "flex", alignItems: "flex-start" };
 const removeStyle = { border: 0, background: "transparent", color: "#e58b8b", cursor: "pointer" };
 

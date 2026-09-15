@@ -1,215 +1,110 @@
 # The Isaac Oracle
 
-An interactive knowledge platform and build-analysis companion for The Binding of Isaac: Rebirth.
+[![CI](https://github.com/lubna-ishaq/binding-of-isaac-oracle/actions/workflows/ci.yml/badge.svg)](https://github.com/lubna-ishaq/binding-of-isaac-oracle/actions/workflows/ci.yml)
 
-## What is The Binding of Isaac?
+A web app for **The Binding of Isaac: Rebirth** where you can look up every item, compare items and (soon) get help with your build.
 
-The Binding of Isaac is a roguelike action game where players combine hundreds of items, characters, health mechanics and progression systems to create unique runs.
+Isaac has more than 700 items, lots of different heart types and thousands of item combinations, and the information is spread over many wiki pages. The goal of this project is to have all of it in one place.
 
-With over 700 collectible items, dozens of character-specific mechanics and thousands of possible interactions, understanding builds and item choices can quickly become overwhelming.
+**This is still a work in progress.** The item database, item pages, the comparison page and the health system are working. The AI coach page is there, but the analysis behind it is not done yet.
 
-The Isaac Oracle aims to bring game knowledge into a single searchable and interactive platform.
+![Item explorer with the quality 4 filter](docs/screenshots/home.png)
 
-## Project Status
+## What works right now
 
-### Implemented
+- **Item explorer:** all 719 items (171 active, 548 passive). You can search by name, filter by quality (0 to 4), sort A-Z or by quality and switch between a text view and an image view with tooltips.
+- **Item pages:** icon, quality, description, pickup quote and type for every item.
+- **Compare:** pick two items and see them next to each other.
+- **Health system:** red, soul, black, bone, rotten, eternal, golden and broken hearts. The hearts are pixel SVGs so they look like the game.
+- **Data pipeline:** a Python scraper that builds the item list from the wiki.
 
-✅ 730+ documented items
+## What I am working on
 
-✅ Searchable item database
+- **AI coach:** choose your items and hearts, ask a question and get strengths, risks and what to focus on next. The page is done, the real analysis is not (right now it gives a placeholder answer).
+- **Synergies and build analyzer**
+- **Screenshot recognition:** upload a screenshot of your run and the app reads your items
 
-✅ Dynamic item pages
+| Item page | AI coach (preview) |
+| --- | --- |
+| ![Item page](docs/screenshots/item.png) | ![AI coach](docs/screenshots/coach.png) |
 
-✅ Item comparison
+## Built with
 
-✅ Quality filtering
+- React 19, React Router and Vite
+- Python with requests and BeautifulSoup for the scraper
+- ESLint, Vitest and pytest, running on GitHub Actions
 
-✅ Sorting and search
+## Run it locally
 
-✅ Generated item data pipeline
+You need Node.js 20 or newer.
 
-✅ Health-system modelling
+```bash
+git clone https://github.com/lubna-ishaq/binding-of-isaac-oracle.git
+cd binding-of-isaac-oracle/frontend
+npm install
+npm run dev
+```
 
-✅ AI Coach interface
+Then open http://localhost:5173.
 
-### In Development
+Other commands (inside `frontend/`):
 
-🚧 AI Coach
+- `npm run build` builds the app into `dist/`
+- `npm run lint` runs ESLint
+- `npm test` runs the tests
 
-🚧 Synergy system
+## Item data
 
-🚧 Build analyzer
+The items come from the item tables on the [Binding of Isaac: Rebirth Wiki](https://bindingofisaacrebirth.wiki.gg/wiki/Items).
 
-🚧 Screenshot detection
+```bash
+pip install -r scraper/requirements.txt
+python scraper/scrape_items.py      # downloads the tables and writes frontend/src/data/items.generated.json
+python scraper/validate_items.py    # checks ids, types and quality
+python -m pytest scraper/tests      # tests for the parser
+```
 
-### Planned
+Note: the wiki shows old and new values next to each other (for example a different quality before and after Repentance). The scraper now removes everything marked as "Removed in ..." so the app only shows the current Repentance+ values.
 
-📋 Boss encyclopedia
+## Project structure
 
-📋 Character encyclopedia
-
-📋 Enemy encyclopedia
-
-📋 Room encyclopedia
-
-📋 Pill database
-
-📋 Rune database
-
-📋 Card database
-
-📋 Transformation tracker
-
-📋 Route planner
-
-📋 Progress tracker
-
-## Current Features
-
-### Item Explorer
-
-Browse and search hundreds of documented Isaac items.
-
-Features:
-
-- Search by name
-- Quality filters
-- Alphabetical sorting
-- Quality sorting
-- Text view
-- Image view
-
-### Item Detail Pages
-
-Every item has its own page containing:
-
-- Image
-- Quality
-- Description
-- Quote
-- Type
-
-### Item Comparison
-
-Compare any two items side-by-side.
-
-Includes:
-
-- Item artwork
-- Quality ratings
-- Descriptions
-- Quotes
-- Item categories
-
-### AI Coach (Prototype)
-
-The current AI Coach interface supports:
-
-- Manual build selection
-- Health configuration
-- Build overview
-- Screenshot upload workflow
-
-The analysis engine is currently under development.
-
-## Screenshots
-
-### Home Page
-
-screenshots/homepage.png
-
-### Item Page
-
-screenshots/itempage.png
-
-### Compare Page
-
-screenshots/comparepage.png
-
-### AI Coach
-
-screenshots/coachpage.png
-
-## Why This Project Exists
-
-Many Isaac resources are spread across separate wiki pages.
-
-This project aims to answer questions such as:
-
-- Which item should I take?
-- What synergies does this item have?
-- Which build is stronger?
-- What transformation am I close to completing?
-- Which route should I take next?
-- How does my current health setup affect item choices?
+```text
+frontend/
+  public/            favicon and the dancing Isaac
+  src/components/    item image and all AI coach parts
+  src/data/          generated item list
+  src/pages/         home, item, compare, coach
+  src/utils/         heart logic, image urls, tests
+scraper/             scraper, validation and tests
+docs/                screenshots, project plan, heart designs
+```
 
 ## Roadmap
 
-### Phase 1
+- [x] Item explorer, item pages, compare page, health system
+- [x] Item database with scraper and validation
+- [ ] Synergies (item pairs, bigger combos, character specific)
+- [ ] Synergy graph with React Flow
+- [ ] Build analyzer and a real AI coach
+- [ ] Screenshot recognition
+- [ ] Pages for characters, bosses, enemies, trinkets, cards, runes and pills
+- [ ] Rooms, floors, route planner, transformations
+- [ ] Progress tracking and a better mobile layout
 
-✅ Item Explorer
+The full plan is in [PROJECT_BOARD.md](PROJECT_BOARD.md).
 
-✅ Item Pages
+## Live demo
 
-✅ Item Comparison
+The repo has a GitHub Pages workflow. To put the app online: Settings > Pages > Source: GitHub Actions, then run "Deploy to GitHub Pages" in the Actions tab.
 
-✅ Health System
+## Credits
 
-### Phase 2
+This is a fan project and has nothing to do with Edmund McMillen, Nicalis or the publishers of The Binding of Isaac.
 
-🚧 Build Analyzer
-
-🚧 Synergy Engine
-
-🚧 Screenshot Recognition
-
-🚧 AI Coach
-
-### Phase 3
-
-📋 Bosses
-
-📋 Enemies
-
-📋 Characters
-
-📋 Trinkets
-
-📋 Runes
-
-📋 Cards
-
-📋 Pills
-
-### Phase 4
-
-📋 Rooms
-
-📋 Floors
-
-📋 Routes
-
-📋 Transformations
-
-📋 Unlock Tracker
-
-📋 Progress Tracking
-
-For the complete long-term roadmap, see PROJECT_BOARD.md.
-
-## Technology Stack
-
-- React
-- React Router
-- Vite
-- JavaScript
-- JSON datasets
-- Python scraping and import tools
+- Item names, quotes, descriptions and quality values are from the [Binding of Isaac: Rebirth Wiki](https://bindingofisaacrebirth.wiki.gg/wiki/Items) (CC BY-SA 4.0), so the generated item data uses the same license.
+- The item icons are loaded from the wiki and belong to their owners.
+- More details in [SOURCES.md](SOURCES.md).
 
 ## License
 
-Source code is licensed under the MIT License.
-
-Game-related content, images and external data sources may be subject to their own licenses and copyright restrictions.
-
-The Isaac Oracle is an unofficial fan-made project and is not affiliated with the creators or publishers of The Binding of Isaac.
+My code is under the [MIT License](LICENSE). The game content is not.

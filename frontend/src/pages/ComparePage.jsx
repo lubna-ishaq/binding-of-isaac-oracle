@@ -1,17 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+import ItemImage from "../components/ItemImage";
 import items from "../data/items.generated.json";
-
-function getImageUrl(item) {
-  if (!item.imageSource) {
-    return item.image;
-  }
-
-  return item.imageSource.startsWith("/")
-    ? `https://bindingofisaacrebirth.wiki.gg${item.imageSource}`
-    : item.imageSource;
-}
 
 function getQualityColor(quality) {
   const colors = {
@@ -38,15 +29,7 @@ function CompareCard({ item }) {
         textAlign: "center",
       }}
     >
-      <img
-        src={getImageUrl(item)}
-        alt={item.name}
-        style={{
-          width: "120px",
-          height: "120px",
-          objectFit: "contain",
-        }}
-      />
+      <ItemImage item={item} size={120} />
       <h2 style={{ color: "#fff", margin: "16px 0 12px" }}>
         {item.name}
       </h2>
@@ -62,7 +45,7 @@ function CompareCard({ item }) {
       >
         Quality {item.quality}
       </p>
-      <p style={{ color: "#d4af37", fontWeight: "bold" }}>
+      <p style={{ color: "#d4af37", fontWeight: "bold", textTransform: "capitalize" }}>
         {item.type}
       </p>
       <p style={{ fontStyle: "italic", minHeight: "28px" }}>

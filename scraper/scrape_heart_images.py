@@ -10,8 +10,10 @@ from bs4 import BeautifulSoup
 
 SOURCE_PAGE = "https://bindingofisaacrebirth.fandom.com/wiki/Hearts"
 SOURCE_BASE = "https://bindingofisaacrebirth.fandom.com/"
-HEART_DIR = Path("frontend/public/images/hearts")
-OUTPUT_FILE = Path("scraper/output/hearts.generated.json")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+PUBLIC_DIR = REPO_ROOT / "frontend" / "public"
+HEART_DIR = PUBLIC_DIR / "images" / "hearts"
+OUTPUT_FILE = REPO_ROOT / "scraper" / "output" / "hearts.generated.json"
 USER_AGENT = "IsaacOracleHeartScraper/1.0 (educational fan project)"
 
 ASSETS = [
@@ -59,7 +61,7 @@ def discover_images(html):
 
 
 def download(session, entry, force):
-    destination = Path(".") / entry["localPath"].lstrip("/")
+    destination = PUBLIC_DIR / entry["localPath"].lstrip("/")
     destination.parent.mkdir(parents=True, exist_ok=True)
     if destination.exists() and not force:
         entry["downloaded"] = True

@@ -2,8 +2,10 @@ import json
 from pathlib import Path
 from urllib.parse import urlparse
 
-METADATA_FILE = Path("scraper/output/hearts.generated.json")
-HEART_ROOT = (Path("frontend/public/images/hearts")).resolve()
+REPO_ROOT = Path(__file__).resolve().parent.parent
+PUBLIC_DIR = REPO_ROOT / "frontend" / "public"
+METADATA_FILE = REPO_ROOT / "scraper" / "output" / "hearts.generated.json"
+HEART_ROOT = (PUBLIC_DIR / "images" / "hearts").resolve()
 
 
 def main():
@@ -20,7 +22,7 @@ def main():
         if source and urlparse(source).scheme not in {"http", "https"}:
             errors.append(f"invalid sourceImage: {entry.get('id')}")
         local_path = entry.get("localPath", "")
-        resolved = (Path("frontend/public") / local_path.lstrip("/")).resolve()
+        resolved = (PUBLIC_DIR / local_path.lstrip("/")).resolve()
         if HEART_ROOT not in resolved.parents:
             errors.append(f"path outside heart directory: {local_path}")
         if entry.get("downloaded") and (not resolved.exists() or resolved.stat().st_size == 0):

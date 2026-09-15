@@ -1,9 +1,11 @@
+import ItemImage from "../ItemImage";
+
 function BuildSummary({ buildItems, onRemoveItem }) {
   return (
     <section style={cardStyle}>
       <h2 style={headingStyle}>Selected Build</h2>
       {buildItems.length === 0 ? (
-        <p style={{ color: "#bbb" }}>No items detected yet.</p>
+        <p style={{ color: "#bbb" }}>No items selected yet.</p>
       ) : (
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {buildItems.map((item) => (
@@ -16,11 +18,7 @@ function BuildSummary({ buildItems, onRemoveItem }) {
                 marginBottom: "10px",
               }}
             >
-              <img
-                src={getImageUrl(item)}
-                alt=""
-                style={{ width: "42px", height: "42px", objectFit: "contain" }}
-              />
+              <ItemImage item={item} size={42} alt="" />
               <span style={{ flex: 1 }}>
                 {item.name} <span style={{ color: "#d4af37" }}>Q{item.quality}</span>
               </span>
@@ -38,12 +36,6 @@ function BuildSummary({ buildItems, onRemoveItem }) {
       )}
     </section>
   );
-}
-
-function getImageUrl(item) {
-  return item.imageSource?.startsWith("/")
-    ? `https://bindingofisaacrebirth.wiki.gg${item.imageSource}`
-    : item.imageSource || item.image;
 }
 
 const cardStyle = {

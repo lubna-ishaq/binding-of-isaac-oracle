@@ -1,3 +1,4 @@
+import copy
 import json
 import re
 import time
@@ -9,15 +10,10 @@ from bs4 import BeautifulSoup
 
 SOURCE_URL = "https://bindingofisaacrebirth.wiki.gg/wiki/Items"
 
-OUTPUT_FILE = Path(
-    "/workspaces/isaac-synergy-graph/"
-    "scraper/output/items.generated.json"
-)
+# paths relative to the repo root, so the script also works outside Codespaces
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
-FRONTEND_FILE = Path(
-    "/workspaces/isaac-synergy-graph/"
-    "frontend/src/data/items.generated.json"
-)
+FRONTEND_FILE = REPO_ROOT / "frontend" / "src" / "data" / "items.generated.json"
 
 
 def create_slug(name):
@@ -35,11 +31,52 @@ def create_slug(name):
     return slug.strip("-")
 
 
+CONTEXT_CLASS = re.compile(r"^cf-context-\d+$")
+
+
+def drop_outdated_versions(cell):
+    """
+    Remove values that only exist in older game versions.
+
+    The wiki shows old and new values next to each other. The old ones
+    have a small icon with the title "Removed in ...". Everything with the
+    same cf-context-<n> class belongs to that old value, so all of it gets
+    removed and only the Repentance+ value is left.
+    """
+    cell = copy.copy(cell)
+
+    for icon in cell.find_all("img", class_="dlc"):
+        if "Removed in" not in (icon.get("title") or ""):
+            continue
+
+        context = icon.find_parent(class_=CONTEXT_CLASS)
+
+        if context is None:
+            continue
+
+        context_class = next(
+            name for name in context.get("class", [])
+            if CONTEXT_CLASS.match(name)
+        )
+
+        for element in cell.find_all(class_=context_class):
+            element.decompose()
+
+    for element in cell.find_all(["img", "button"]):
+        element.decompose()
+
+    return cell
+
+
 def clean_text(value):
     """
     Remove repeated whitespace from scraped text.
     """
-    return " ".join(value.get_text(" ", strip=True).split())
+    text = " ".join(value.get_text(" ", strip=True).split())
+
+    # get_text(" ") puts a space in front of . and , after links ("tears .")
+    text = re.sub(r"\s+([.,;:!?)])", r"\1", text)
+    return re.sub(r"([(])\s+", r"\1", text)
 
 
 def extract_game_id(raw_id):
@@ -89,11 +126,12 @@ def detect_item_type(heading_text):
 
 def find_previous_heading(table):
     """
-    Find the closest heading before a table.
+    Find the h2 heading above a table.
+
+    Only h2, because the active items table has a "Notes" h3 right above it
+    and then every active item ended up as "unknown".
     """
-    heading = table.find_previous(
-        ["h2", "h3", "h4"]
-    )
+    heading = table.find_previous("h2")
 
     if heading is None:
         return ""
@@ -170,11 +208,11 @@ def scrape_items():
 
             seen_game_ids.add(game_id)
 
-            quote = clean_text(cells[3])
-            description = clean_text(cells[4])
+            quote = clean_text(drop_outdated_versions(cells[3]))
+            description = clean_text(drop_outdated_versions(cells[4]))
 
             raw_quality = (
-                clean_text(cells[-1])
+                clean_text(drop_outdated_versions(cells[-1]))
                 if len(cells) >= 6
                 else ""
             )
@@ -242,6 +280,11 @@ def validate_items(items):
                 f"Invalid quality for {item['name']}"
             )
 
+        if item["type"] not in {"active", "passive"}:
+            errors.append(
+                f"Unknown item type for {item['name']}"
+            )
+
     return errors
 
 
@@ -258,6 +301,7 @@ def save_json(items, path):
             ensure_ascii=False,
             indent=2,
         )
+        file.write("\n")
 
 
 def main():
@@ -276,11 +320,9 @@ def main():
             "Import stopped because validation failed."
         )
 
-    save_json(items, OUTPUT_FILE)
     save_json(items, FRONTEND_FILE)
 
-    print(f"Generated: {OUTPUT_FILE}")
-    print(f"Frontend copy: {FRONTEND_FILE}")
+    print(f"Generated: {FRONTEND_FILE}")
 
     # Be polite if the script is extended later.
     time.sleep(1)

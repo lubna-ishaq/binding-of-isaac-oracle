@@ -20,7 +20,7 @@ The project combines:
 
 ## Item Explorer
 
-Status: ✅
+Status: Done
 
 - Item search
 - Quality filters
@@ -31,7 +31,7 @@ Status: ✅
 
 ## Dynamic Item Pages
 
-Status: ✅
+Status: Done
 
 - Individual pages
 - Descriptions
@@ -41,7 +41,7 @@ Status: ✅
 
 ## Item Comparison
 
-Status: ✅
+Status: Done
 
 - Side-by-side comparison
 - Images
@@ -50,7 +50,7 @@ Status: ✅
 
 ## Health System
 
-Status: ✅
+Status: Done
 
 - Red Hearts
 - Soul Hearts
@@ -67,11 +67,12 @@ Status: ✅
 
 ## Item Database
 
-Status: ✅
+Status: Done
 
 Current:
 
-- 730+ Items
+- 719 Items (171 active, 548 passive)
+- Current Repentance+ values only
 - Images
 - Quotes
 - Descriptions
@@ -87,9 +88,10 @@ Future:
 
 ## Data Validation
 
-Status: ✅
+Status: Done
 
-- Validation scripts
+- Validation scripts (`validate_items.py`, `validate_hearts.py`)
+- Parser tests (`scraper/tests`)
 - Import scripts
 - Scrapers
 
@@ -97,7 +99,7 @@ Status: ✅
 
 # Phase 3 - Synergy System
 
-Status: 🚧
+Status: In progress
 
 ## Pairwise Synergies
 
@@ -152,7 +154,7 @@ Status: 🚧
 
 # Phase 4 - Synergy Graph
 
-Status: 📋
+Status: Planned
 
 ## Graph View
 
@@ -179,7 +181,7 @@ Status: 📋
 
 ## Characters
 
-Status: 📋
+Status: Planned
 
 - Character pages
 - Starting stats
@@ -189,7 +191,7 @@ Status: 📋
 
 ## Bosses
 
-Status: 📋
+Status: Planned
 
 - Boss pages
 - Phases
@@ -198,7 +200,7 @@ Status: 📋
 
 ## Enemies
 
-Status: 📋
+Status: Planned
 
 - Enemy pages
 - Variants
@@ -207,29 +209,29 @@ Status: 📋
 
 ## Trinkets
 
-Status: 📋
+Status: Planned
 
 ## Cards
 
-Status: 📋
+Status: Planned
 
 ## Runes
 
-Status: 📋
+Status: Planned
 
 ## Soul Stones
 
-Status: 📋
+Status: Planned
 
 ## Pills
 
-Status: 📋
+Status: Planned
 
 ---
 
 # Phase 6 - Rooms
 
-Status: 📋
+Status: Planned
 
 ## Core Rooms
 
@@ -268,7 +270,7 @@ Status: 📋
 
 # Phase 7 - Floors and Progression
 
-Status: 📋
+Status: Planned
 
 ## Floors
 
@@ -311,7 +313,7 @@ Status: 📋
 
 # Phase 8 - Transformations
 
-Status: 📋
+Status: Planned
 
 - Guppy
 - Conjoined
@@ -333,7 +335,7 @@ Status: 📋
 
 # Phase 9 - Build Analyzer
 
-Status: 🚧
+Status: In progress
 
 ## Build Evaluation
 
@@ -357,7 +359,7 @@ Status: 🚧
 
 # Phase 10 - AI Coach
 
-Status: 🚧
+Status: In progress
 
 ## Input
 
@@ -385,7 +387,7 @@ Status: 🚧
 
 # Phase 11 - Screenshot Recognition
 
-Status: 📋
+Status: Planned
 
 ## Recognition Targets
 
@@ -410,7 +412,7 @@ Status: 📋
 
 # Phase 12 - Progress Tracking
 
-Status: 📋
+Status: Planned
 
 - Completion Marks
 - Challenges
@@ -422,7 +424,7 @@ Status: 📋
 
 # Phase 13 - Polish
 
-Status: 📋
+Status: Planned
 
 - Better UI
 - Mobile Support
