@@ -195,6 +195,8 @@ This project aims to answer questions such as:
 
 📋 Progress Tracking
 
+For the complete long-term roadmap, see PROJECT_BOARD.md.
+
 ## Technology Stack
 
 - React
