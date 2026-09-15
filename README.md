@@ -1,4 +1,4 @@
-## 🎮 Isaac Oracle
+## Isaac Oracle
 
 Status: Active
 
