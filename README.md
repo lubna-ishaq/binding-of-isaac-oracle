@@ -26,6 +26,19 @@ The long-term goal is to bring items, synergies, characters, health, bosses, ene
 > The Item Explorer, item detail pages and item comparison are implemented.
 > The AI Coach, screenshot recognition, synergy engine and full encyclopedia are still in development.
 
+## Why This Project Exists
+
+Many Isaac resources are spread across separate wiki pages.
+
+This project aims to bring game knowledge into a single searchable platform that can answer questions such as:
+
+- Which item should I take?
+- What synergies does this item have?
+- Which character benefits most from this item?
+- What route should I take next?
+- Which transformation am I close to completing?
+- How does my health setup affect item decisions?
+
 ## Current Project Status
 
 ### Implemented
