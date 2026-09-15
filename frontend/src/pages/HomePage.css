@@ -1,0 +1,154 @@
+.search-box {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.search-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.filter-row {
+  margin: 20px 0;
+}
+
+.filter-row + .filter-row {
+  margin-top: -10px;
+}
+
+.item-count {
+  margin-bottom: 30px;
+  color: var(--gold);
+}
+
+.sort-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.sort-label .field {
+  padding: 8px 10px;
+}
+
+.view-switch {
+  margin-bottom: 24px;
+}
+
+.view-switch .toggle-button {
+  padding: 10px 18px;
+}
+
+.quality-section {
+  scroll-margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.quality-section h2 {
+  margin: 20px 0;
+  color: var(--gold);
+}
+
+.item-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.item-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  min-height: 80px;
+  padding: 8px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.item-card h3 {
+  margin: 0;
+  color: var(--gold);
+  font-size: 1.1rem;
+  line-height: 1.15;
+}
+
+.item-card p {
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.item-tile {
+  position: relative;
+  width: 96px;
+}
+
+.item-tile__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.item-tile__caption {
+  display: none;
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  line-height: 1.1;
+}
+
+.item-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  z-index: 10;
+  width: 190px;
+  padding: 12px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: var(--surface-dark);
+  color: var(--text);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.item-tooltip strong {
+  color: var(--gold);
+}
+
+/* phones and tablets have no hover, so the name is always shown under the icon */
+@media (hover: none) {
+  .item-tile__caption {
+    display: block;
+  }
+
+  .item-tooltip {
+    display: none;
+  }
+}

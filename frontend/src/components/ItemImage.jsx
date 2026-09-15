@@ -1,31 +1,22 @@
 import { useState } from "react";
 
 import { getItemImageUrl } from "../utils/itemImages";
+import "./ItemImage.css";
 
 // shows the item name instead of a broken image if the icon does not load
-function ItemImage({ item, size = 72, alt, style }) {
+function ItemImage({ item, size = 72, alt, className = "" }) {
   const [failedSrc, setFailedSrc] = useState(null);
   const src = getItemImageUrl(item);
+  // the size changes per page, so it stays inline
+  const sizeStyle = { width: size, height: size };
 
   if (!src || failedSrc === src) {
     return (
       <span
         role="img"
         aria-label={alt ?? item?.name ?? "Item"}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: size,
-          height: size,
-          padding: "4px",
-          color: "#d4af37",
-          fontSize: "0.7rem",
-          lineHeight: 1.1,
-          textAlign: "center",
-          overflow: "hidden",
-          ...style,
-        }}
+        className={`item-image item-image--fallback ${className}`}
+        style={sizeStyle}
       >
         {item?.name}
       </span>
@@ -38,13 +29,8 @@ function ItemImage({ item, size = 72, alt, style }) {
       alt={alt ?? item.name}
       loading="lazy"
       onError={() => setFailedSrc(src)}
-      style={{
-        width: size,
-        height: size,
-        objectFit: "contain",
-        imageRendering: "pixelated",
-        ...style,
-      }}
+      className={`item-image ${className}`}
+      style={sizeStyle}
     />
   );
 }

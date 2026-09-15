@@ -148,3 +148,106 @@ textarea {
   color: var(--text-muted);
   font-size: 0.8rem;
 }
+
+/* shared building blocks */
+
+.page {
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page-heading {
+  margin: 32px 0;
+  color: var(--gold);
+  text-align: center;
+}
+
+.back-link {
+  color: var(--gold);
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.card-title {
+  margin-top: 0;
+  color: var(--gold);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.hint {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.field {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.toggle-button {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggle-button.is-active {
+  background: var(--gold);
+  color: #000;
+}
+
+.gold-button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--surface-dark);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.gold-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.remove-button {
+  padding: 6px 8px;
+  border: 1px solid #9b4b4b;
+  border-radius: 6px;
+  background: transparent;
+  color: #e58b8b;
+  cursor: pointer;
+}
+
+.loading {
+  margin: 40px 0;
+  color: var(--gold);
+}
+
+.not-found p {
+  margin: 20px 0;
+}

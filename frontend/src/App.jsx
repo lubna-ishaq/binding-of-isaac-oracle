@@ -1,15 +1,18 @@
+import { lazy, Suspense } from "react";
 import { Link, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import ItemPage from "./pages/ItemPage";
-import ComparePage from "./pages/ComparePage";
-import CoachPage from "./pages/CoachPage";
+
+// every page is its own chunk, so the first load only gets what it needs
+const HomePage = lazy(() => import("./pages/HomePage"));
+const ItemPage = lazy(() => import("./pages/ItemPage"));
+const ComparePage = lazy(() => import("./pages/ComparePage"));
+const CoachPage = lazy(() => import("./pages/CoachPage"));
 
 function NotFoundPage() {
   return (
-    <main style={{ padding: "20px" }}>
+    <main className="page not-found">
       <h1 className="page-title">Page not found</h1>
-      <p style={{ margin: "20px 0" }}>This room is empty.</p>
-      <Link to="/">← Back to all items</Link>
+      <p>This room is empty.</p>
+      <Link to="/" className="back-link">← Back to all items</Link>
     </main>
   );
 }
@@ -17,41 +20,43 @@ function NotFoundPage() {
 function App() {
   return (
     <>
-    <Routes>
-      <Route
-        path="/"
-        element={<HomePage />}
-      />
+      <Suspense fallback={<main className="page"><p className="loading">Loading...</p></main>}>
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
 
-      <Route
-        path="/item/:itemId"
-        element={<ItemPage />}
-      />
+          <Route
+            path="/item/:itemId"
+            element={<ItemPage />}
+          />
 
-      <Route
-        path="/compare"
-        element={<ComparePage />}
-      />
+          <Route
+            path="/compare"
+            element={<ComparePage />}
+          />
 
-      <Route
-        path="/coach"
-        element={<CoachPage />}
-      />
+          <Route
+            path="/coach"
+            element={<CoachPage />}
+          />
 
-      <Route
-        path="*"
-        element={<NotFoundPage />}
-      />
-    </Routes>
+          <Route
+            path="*"
+            element={<NotFoundPage />}
+          />
+        </Routes>
+      </Suspense>
 
-    <footer className="site-footer">
-      Unofficial fan project. Not affiliated with the creators or publishers of
-      The Binding of Isaac. Item text from the{" "}
-      <a href="https://bindingofisaacrebirth.wiki.gg/wiki/Items">
-        Binding of Isaac: Rebirth Wiki
-      </a>{" "}
-      (CC BY-SA 4.0). Game artwork belongs to its respective owners.
-    </footer>
+      <footer className="site-footer">
+        Unofficial fan project. Not affiliated with the creators or publishers of
+        The Binding of Isaac. Item text from the{" "}
+        <a href="https://bindingofisaacrebirth.wiki.gg/wiki/Items">
+          Binding of Isaac: Rebirth Wiki
+        </a>{" "}
+        (CC BY-SA 4.0). Game artwork belongs to its respective owners.
+      </footer>
     </>
   );
 }

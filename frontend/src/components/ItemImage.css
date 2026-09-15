@@ -1,0 +1,16 @@
+.item-image {
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.item-image--fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 4px;
+  color: var(--gold);
+  font-size: 0.7rem;
+  line-height: 1.1;
+  text-align: center;
+}

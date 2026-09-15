@@ -1,173 +1,86 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import ItemImage from "../components/ItemImage";
-import items from "../data/items.generated.json";
+import { useItems } from "../data/useItems";
+import "./ComparePage.css";
 
-function getQualityColor(quality) {
-  const colors = {
-    4: "#d4af37",
-    3: "#70b77e",
-    2: "#5aa9d6",
-    1: "#a9a9a9",
-    0: "#d96b6b",
-  };
-
-  return colors[quality] || "#d4af37";
-}
+const QUALITY_COLORS = {
+  4: "#d4af37",
+  3: "#70b77e",
+  2: "#5aa9d6",
+  1: "#a9a9a9",
+  0: "#d96b6b",
+};
 
 function CompareCard({ item }) {
   return (
-    <article
-      style={{
-        flex: "1 1 280px",
-        maxWidth: "420px",
-        background: "#222",
-        border: "2px solid #444",
-        borderRadius: "12px",
-        padding: "24px",
-        textAlign: "center",
-      }}
-    >
+    <article className="compare-card">
       <ItemImage item={item} size={120} />
-      <h2 style={{ color: "#fff", margin: "16px 0 12px" }}>
-        {item.name}
-      </h2>
+      <h2>{item.name}</h2>
       <p
-        style={{
-          display: "inline-block",
-          background: getQualityColor(item.quality),
-          color: item.quality >= 3 ? "black" : "white",
-          borderRadius: "8px",
-          padding: "6px 12px",
-          fontWeight: "bold",
-        }}
+        className={`compare-card__quality ${item.quality >= 3 ? "is-high" : ""}`}
+        style={{ background: QUALITY_COLORS[item.quality] ?? QUALITY_COLORS[4] }}
       >
         Quality {item.quality}
       </p>
-      <p style={{ color: "#d4af37", fontWeight: "bold", textTransform: "capitalize" }}>
-        {item.type}
-      </p>
-      <p style={{ fontStyle: "italic", minHeight: "28px" }}>
-        "{item.quote}"
-      </p>
-      <div
-        style={{
-          marginTop: "20px",
-          paddingTop: "18px",
-          borderTop: "1px solid #444",
-          lineHeight: "1.6",
-        }}
-      >
+      <p className="compare-card__type">{item.type}</p>
+      <p className="compare-card__quote">"{item.quote}"</p>
+      <div className="compare-card__description">
         {item.description || "No description available."}
       </div>
     </article>
   );
 }
 
-function ComparePage() {
-  const [firstItemId, setFirstItemId] = useState(items[0]?.id || "");
-  const [secondItemId, setSecondItemId] = useState(items[1]?.id || "");
+function ItemPicker({ label, items, value, onChange }) {
+  return (
+    <label>
+      {label}
+      <select value={value} onChange={(event) => onChange(event.target.value)}>
+        {items.map((item) => (
+          <option key={item.id} value={item.id}>
+            {item.name}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
 
-  const firstItem = items.find((item) => item.id === firstItemId) || items[0];
-  const secondItem =
-    items.find((item) => item.id === secondItemId) || items[1] || items[0];
+function ComparePage() {
+  const items = useItems();
+  const [firstItemId, setFirstItemId] = useState("");
+  const [secondItemId, setSecondItemId] = useState("");
+
+  if (!items) {
+    return (
+      <main className="page">
+        <p className="loading">Loading items...</p>
+      </main>
+    );
+  }
+
+  // until something is picked, the first two items are compared
+  const firstItem = items.find((item) => item.id === firstItemId) ?? items[0];
+  const secondItem = items.find((item) => item.id === secondItemId) ?? items[1] ?? items[0];
 
   return (
-    <main
-      style={{
-        background: "#563224",
-        minHeight: "100vh",
-        color: "white",
-        padding: "20px",
-      }}
-    >
-      <Link to="/" style={{ color: "#d4af37" }}>
+    <main className="page">
+      <Link to="/" className="back-link">
         ← Back
       </Link>
 
-      <h1
-        style={{
-          textAlign: "center",
-          color: "#d4af37",
-          margin: "32px 0",
-        }}
-      >
-        COMPARE ITEMS
-      </h1>
+      <h1 className="page-heading">COMPARE ITEMS</h1>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "16px",
-          flexWrap: "wrap",
-          marginBottom: "36px",
-        }}
-      >
-        <label>
-          Item A
-          <select
-            value={firstItemId}
-            onChange={(event) => setFirstItemId(event.target.value)}
-            style={{
-              display: "block",
-              marginTop: "8px",
-              padding: "10px",
-              minWidth: "220px",
-              borderRadius: "8px",
-            }}
-          >
-            {items.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label>
-          Item B
-          <select
-            value={secondItemId}
-            onChange={(event) => setSecondItemId(event.target.value)}
-            style={{
-              display: "block",
-              marginTop: "8px",
-              padding: "10px",
-              minWidth: "220px",
-              borderRadius: "8px",
-            }}
-          >
-            {items.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </label>
+      <div className="compare-pickers">
+        <ItemPicker label="Item A" items={items} value={firstItem.id} onChange={setFirstItemId} />
+        <ItemPicker label="Item B" items={items} value={secondItem.id} onChange={setSecondItemId} />
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "stretch",
-          gap: "24px",
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="compare-cards">
         <CompareCard item={firstItem} />
-        <div
-          style={{
-            alignSelf: "center",
-            color: "#d4af37",
-            fontSize: "1.5rem",
-            fontWeight: "bold",
-          }}
-        >
-          VS
-        </div>
+        <div className="compare-vs">VS</div>
         <CompareCard item={secondItem} />
       </div>
     </main>

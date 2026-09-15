@@ -1,37 +1,26 @@
 function CoachChat({ question, onQuestionChange, onAnalyze, response, canAnalyze }) {
   return (
-    <section style={cardStyle}>
-      <h2 style={headingStyle}>Ask the Isaac Coach</h2>
+    <section className="card">
+      <h2 className="card-title">Ask the Isaac Coach</h2>
       <textarea
+        className="field coach-question"
         value={question}
         onChange={(event) => onQuestionChange(event.target.value)}
         placeholder="Ask something about your build..."
+        aria-label="Question for the coach"
         rows="4"
-        style={{
-          width: "100%",
-          boxSizing: "border-box",
-          padding: "12px",
-          borderRadius: "8px",
-          border: "1px solid #444",
-          background: "#171717",
-          color: "white",
-          resize: "vertical",
-        }}
       />
       <button
+        type="button"
+        className="gold-button coach-analyze"
         onClick={onAnalyze}
         disabled={!canAnalyze}
-        style={{
-          ...buttonStyle,
-          opacity: canAnalyze ? 1 : 0.45,
-          cursor: canAnalyze ? "pointer" : "not-allowed",
-        }}
       >
         Analyze
       </button>
       {response && (
-        <div style={{ marginTop: "20px", lineHeight: "1.6" }}>
-          <h3 style={{ color: "#d4af37" }}>Analysis</h3>
+        <div className="coach-answer">
+          <h3>Analysis</h3>
           <h4>Strengths</h4>
           <p>{response.strengths}</p>
           <h4>Risks</h4>
@@ -49,28 +38,5 @@ function CoachChat({ question, onQuestionChange, onAnalyze, response, canAnalyze
     </section>
   );
 }
-
-const cardStyle = {
-  background: "#222",
-  border: "1px solid #444",
-  borderRadius: "12px",
-  padding: "20px",
-};
-
-const headingStyle = {
-  color: "#d4af37",
-  marginTop: 0,
-};
-
-const buttonStyle = {
-  marginTop: "12px",
-  padding: "10px 16px",
-  border: "0",
-  borderRadius: "8px",
-  background: "#d4af37",
-  color: "#171717",
-  fontWeight: "bold",
-  cursor: "pointer",
-};
 
 export default CoachChat;

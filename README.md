@@ -14,7 +14,7 @@ Isaac has more than 700 items, lots of different heart types and thousands of it
 
 ## What works right now
 
-- **Item explorer:** all 719 items (171 active, 548 passive). You can search by name, filter by quality (0 to 4), sort A-Z or by quality and switch between a text view and an image view with tooltips.
+- **Item explorer:** all 719 items (171 active, 548 passive). You can search by name (or also in the descriptions), filter by quality (0 to 4) and by active/passive, sort A-Z or by quality and switch between a text view and an image view. On phones the item names are shown under the icons.
 - **Item pages:** icon, quality, description, pickup quote and type for every item.
 - **Compare:** pick two items and see them next to each other.
 - **Health system:** red, soul, black, bone, rotten, eternal, golden and broken hearts. The hearts are pixel SVGs so they look like the game.
@@ -34,7 +34,7 @@ Isaac has more than 700 items, lots of different heart types and thousands of it
 
 - React 19, React Router and Vite
 - Python with requests and BeautifulSoup for the scraper
-- ESLint, Vitest and pytest, running on GitHub Actions
+- ESLint, Vitest, Testing Library and pytest, running on GitHub Actions
 
 ## Run it locally
 
@@ -53,7 +53,7 @@ Other commands (inside `frontend/`):
 
 - `npm run build` builds the app into `dist/`
 - `npm run lint` runs ESLint
-- `npm test` runs the tests
+- `npm test` runs the unit and UI tests (Vitest and Testing Library)
 
 ## Item data
 
@@ -74,9 +74,9 @@ Note: the wiki shows old and new values next to each other (for example a differ
 frontend/
   public/            favicon and the dancing Isaac
   src/components/    item image and all AI coach parts
-  src/data/          generated item list
-  src/pages/         home, item, compare, coach
-  src/utils/         heart logic, image urls, tests
+  src/data/          generated item list and the hook that loads it
+  src/pages/         home, item, compare, coach (each with its own CSS file) and UI tests
+  src/utils/         heart logic, filters, image urls, tests
 scraper/             scraper, validation and tests
 docs/                screenshots and heart designs
 ```

@@ -43,8 +43,8 @@ function HealthSelector({ health, setHealth }) {
   }
 
   return (
-    <section style={cardStyle}>
-      <h2 style={headingStyle}>Health Configuration</h2>
+    <section className="card">
+      <h2 className="card-title">Health Configuration</h2>
       <HalfHeartGroup
         label="Red Hearts"
         units={health.redHeartHalfUnits}
@@ -68,20 +68,20 @@ function HealthSelector({ health, setHealth }) {
       <WholeHeartGroup label="Golden Hearts" icon="gold" value={health.goldenHearts} onChange={(amount) => updateWholeHeart("goldenHearts", amount)} />
       <WholeHeartGroup label="Rotten Hearts" icon="rotten" state="half" fillOnClick value={health.rottenHearts} onChange={(amount) => updateWholeHeart("rottenHearts", amount)} />
 
-      <div style={groupStyle}>
-        <h3 style={subheadingStyle}>Bone Hearts</h3>
-        <div style={heartRowStyle}>
-          <button type="button" onClick={advanceBoneHearts} aria-label="Fill Bone Heart" title="Fill Bone Heart" style={exampleButtonStyle}>
+      <div className="heart-group">
+        <h3>Bone Hearts</h3>
+        <div className="heart-row">
+          <button type="button" onClick={advanceBoneHearts} aria-label="Fill Bone Heart" title="Fill Bone Heart" className="heart-button heart-button--example">
             <PixelHeart type="bone" state="full" size={42} />
           </button>
           {health.boneHearts.map((state, index) => (
-            <div key={`${state}-${index}`} style={boneStyle}>
+            <div key={`${state}-${index}`} className="bone-heart">
               <button
                 type="button"
                 title={`Cycle bone heart ${index + 1}`}
                 aria-label={`Cycle bone heart ${index + 1}, currently ${state}`}
                 onClick={advanceBoneHearts}
-                style={iconButtonStyle}
+                className="heart-button"
               >
                 <PixelHeart type="bone" state={state} size={42} />
               </button>
@@ -93,7 +93,7 @@ function HealthSelector({ health, setHealth }) {
                   ...currentHealth,
                   boneHearts: removeBoneHeart(currentHealth.boneHearts, index),
                 }))}
-                style={removeStyle}
+                className="bone-heart__remove"
               >
                 x
               </button>
@@ -102,18 +102,18 @@ function HealthSelector({ health, setHealth }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "18px" }}>
-        <h3 style={subheadingStyle}>Health Summary</h3>
+      <div className="health-summary">
+        <h3>Health Summary</h3>
         {!hasConfiguredHealth(health) ? (
-          <p style={{ color: "#bbb" }}>No health information configured.</p>
+          <p className="muted">No health information configured.</p>
         ) : (
-          <ul style={{ margin: 0, paddingLeft: "20px", color: "#ddd" }}>
+          <ul>
             {createHealthSummary(health).map((entry) => (
               <li key={entry}>{entry}</li>
             ))}
           </ul>
         )}
-        <button type="button" onClick={() => setHealth(createEmptyHealth())} title="Reset health" style={{ ...buttonStyle, marginTop: "14px" }}>
+        <button type="button" onClick={() => setHealth(createEmptyHealth())} title="Reset health" className="gold-button reset-health">
           Reset Health
         </button>
       </div>
@@ -124,56 +124,56 @@ function HealthSelector({ health, setHealth }) {
 function HalfHeartGroup({ label, units, assets, onChange }) {
   const states = renderHalfHeartSequence(units);
   return (
-    <div style={groupStyle}>
-      <h3 style={subheadingStyle}>{label}</h3>
-      <div style={controlRowStyle}>
-        <div style={heartRowStyle}>
-          <button type="button" onClick={() => onChange(1)} aria-label={`Fill ${label} heart`} title="Fill heart" style={exampleButtonStyle}>
+    <div className="heart-group">
+      <h3>{label}</h3>
+      <div className="heart-controls">
+        <div className="heart-row">
+          <button type="button" onClick={() => onChange(1)} aria-label={`Fill ${label} heart`} title="Fill heart" className="heart-button heart-button--example">
             <PixelHeart type={assets} state="full" size={38} />
           </button>
           {states.map((state, index) => (
-            <button type="button" key={`${state}-${index}`} onClick={() => onChange(1)} aria-label={`Fill ${label} heart`} title="Fill heart" style={{ ...iconButtonStyle, marginLeft: index === 0 ? "8px" : 0 }}>
+            <button type="button" key={`${state}-${index}`} onClick={() => onChange(1)} aria-label={`Fill ${label} heart`} title="Fill heart" className={`heart-button ${index === 0 ? "heart-button--first" : ""}`}>
               <PixelHeart type={assets} state={state} size={38} />
             </button>
           ))}
         </div>
         {units > 0 && (
-          <button type="button" onClick={() => onChange(-1)} aria-label={`Remove half ${label} heart`} title="Remove half a heart" style={minusButtonStyle}>
+          <button type="button" onClick={() => onChange(-1)} aria-label={`Remove half ${label} heart`} title="Remove half a heart" className="remove-button heart-minus">
             -
           </button>
         )}
       </div>
-      <span style={{ color: "#bbb" }}>{units / 2} hearts</span>
+      <span className="muted">{units / 2} hearts</span>
     </div>
   );
 }
 
 function WholeHeartGroup({ label, icon, state = "full", value, onChange, fillOnClick = false }) {
   return (
-    <div style={groupStyle}>
-      <h3 style={subheadingStyle}>{label}</h3>
-      <div style={controlRowStyle}>
-        <div style={heartRowStyle}>
-          <button type="button" onClick={() => onChange(1)} aria-label={`Fill ${label} heart`} title="Fill heart" style={exampleButtonStyle}>
+    <div className="heart-group">
+      <h3>{label}</h3>
+      <div className="heart-controls">
+        <div className="heart-row">
+          <button type="button" onClick={() => onChange(1)} aria-label={`Fill ${label} heart`} title="Fill heart" className="heart-button heart-button--example">
             <HeartIcon type={icon} state={state} size={38} />
           </button>
           {Array.from({ length: value }, (_, index) => index).map((index) => (
-            <button type="button" key={index} onClick={() => onChange(fillOnClick ? 1 : -1)} aria-label={`${fillOnClick ? "Fill" : "Remove"} ${label} heart`} title={`${fillOnClick ? "Fill" : "Remove"} heart`} style={iconButtonStyle}>
+            <button type="button" key={index} onClick={() => onChange(fillOnClick ? 1 : -1)} aria-label={`${fillOnClick ? "Fill" : "Remove"} ${label} heart`} title={`${fillOnClick ? "Fill" : "Remove"} heart`} className="heart-button">
               <HeartIcon type={icon} state={state} size={38} />
             </button>
           ))}
         </div>
       </div>
-      <span style={{ color: "#bbb" }}>{value} hearts</span>
+      <span className="muted">{value} hearts</span>
     </div>
   );
 }
 
 function HeartIcon({ type, state = "full", size }) {
   if (type === "gold") {
-    return <span style={{ position: "relative", display: "inline-flex", width: size, height: size }}>
+    return <span className="gold-heart" style={{ width: size, height: size }}>
       <PixelHeart type="red" size={size} />
-      <PixelHeart type="gold" size={size} style={{ position: "absolute", inset: 0 }} />
+      <PixelHeart type="gold" size={size} />
     </span>;
   }
   return <PixelHeart type={type} state={state} size={size} />;
@@ -191,28 +191,5 @@ function createEmptyHealth() {
     boneHearts: [],
   };
 }
-
-const cardStyle = { background: "#222", border: "1px solid #444", borderRadius: "12px", padding: "20px" };
-const headingStyle = { color: "#d4af37", marginTop: 0 };
-const subheadingStyle = { color: "#d4af37", margin: "0 0 8px" };
-const groupStyle = { padding: "12px 0", borderBottom: "1px solid #444" };
-const controlRowStyle = { display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" };
-const heartRowStyle = { display: "flex", flexWrap: "wrap", gap: "4px", alignItems: "center", minHeight: "44px" };
-const buttonStyle = { padding: "7px 12px", border: "1px solid #666", borderRadius: "6px", background: "#d4af37", color: "#171717", fontWeight: "bold", cursor: "pointer" };
-const iconButtonStyle = { position: "relative", border: 0, background: "transparent", padding: "0 2px", cursor: "pointer" };
-const exampleButtonStyle = {
-  ...iconButtonStyle,
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  border: "1px solid #d4af37",
-  padding: "3px",
-  borderRadius: "4px",
-  marginRight: "6px",
-  lineHeight: 0,
-};
-const minusButtonStyle = { padding: "2px 10px", border: "1px solid #9b4b4b", borderRadius: "6px", background: "transparent", color: "#e58b8b", fontWeight: "bold", cursor: "pointer" };
-const boneStyle = { position: "relative", display: "flex", alignItems: "flex-start" };
-const removeStyle = { border: 0, background: "transparent", color: "#e58b8b", cursor: "pointer" };
 
 export default HealthSelector;
