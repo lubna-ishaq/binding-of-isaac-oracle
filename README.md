@@ -6,6 +6,8 @@ A web app for **The Binding of Isaac: Rebirth** where you can look up every item
 
 Isaac has more than 700 items, lots of different heart types and thousands of item combinations, and the information is spread over many wiki pages. The goal of this project is to have all of it in one place.
 
+**Live demo: https://lubna-ishaq.github.io/binding-of-isaac-oracle/**
+
 **This is still a work in progress.** The item database, item pages, the comparison page and the health system are working. The AI coach page is there, but the analysis behind it is not done yet.
 
 ![Item explorer with the quality 4 filter](docs/screenshots/home.png)
@@ -76,7 +78,7 @@ frontend/
   src/pages/         home, item, compare, coach
   src/utils/         heart logic, image urls, tests
 scraper/             scraper, validation and tests
-docs/                screenshots, project plan, heart designs
+docs/                screenshots and heart designs
 ```
 
 ## Roadmap
@@ -95,7 +97,9 @@ The full plan is in [PROJECT_BOARD.md](PROJECT_BOARD.md).
 
 ## Live demo
 
-The repo has a GitHub Pages workflow. To put the app online: Settings > Pages > Source: GitHub Actions, then run "Deploy to GitHub Pages" in the Actions tab.
+The app is hosted on GitHub Pages: https://lubna-ishaq.github.io/binding-of-isaac-oracle/
+
+It is deployed by hand with the "Deploy to GitHub Pages" workflow in the Actions tab.
 
 ## Credits
 
