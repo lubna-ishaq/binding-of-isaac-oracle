@@ -1975,6 +1975,8 @@ All game-related names, artwork and trademarks belong to their respective owners
 
 ## License
 
-The source code may be released under a chosen software license.
+Source code is licensed under the MIT License.
 
-Game assets, scraped descriptions and third-party content are not automatically covered by the source-code license. Their original licenses and attribution requirements must be respected separately.
+Game-related content, images and external data sources may be subject to their own licenses and copyright restrictions.
+
+The Isaac Oracle is an unofficial fan-made project and is not affiliated with the creators or publishers of The Binding of Isaac.
