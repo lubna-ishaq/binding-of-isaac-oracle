@@ -68,16 +68,4 @@ function PixelHeart({ type = "red", state, ratio, size = 32, interactive = false
   );
 }
 
-export function HeartRow({ hp = 0, max = 0, type = "red", size = 32, ...props }) {
-  const states = STATES_BY_TYPE[type] ?? STATES_BY_TYPE.red;
-  const slots = states.includes("empty") ? Math.ceil(max / 2) : Math.ceil(Math.min(hp, max) / 2);
-  return <div style={{ display: "flex", gap: 4, alignItems: "center" }} {...props}>
-    {Array.from({ length: slots }, (_, index) => {
-      const remaining = hp - index * 2;
-      const current = remaining >= 2 ? "full" : remaining === 1 ? "half" : "empty";
-      return <PixelHeart key={index} type={type} state={current} size={size} />;
-    })}
-  </div>;
-}
-
 export default PixelHeart;
