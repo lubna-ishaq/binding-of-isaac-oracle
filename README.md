@@ -2,6 +2,23 @@
 
 A searchable knowledge platform and build-analysis companion for The Binding of Isaac: Rebirth and its expansions.
 
+## What is The Binding of Isaac?
+
+The Binding of Isaac is a roguelike action game where players build unique runs by combining hundreds of items, characters, health systems and special mechanics.
+
+A single run can contain:
+
+- 700+ collectible items
+- dozens of playable characters
+- multiple health systems
+- hundreds of item interactions and synergies
+- branching progression paths
+- many room, enemy and boss types
+
+Because of the sheer number of mechanics and possible combinations, discovering and understanding strong builds can be difficult.
+
+The Isaac Oracle aims to become an interactive knowledge platform and build analysis tool for the game.
+
 The long-term goal is to bring items, synergies, characters, health, bosses, enemies, rooms, floors, pickups, transformations, unlocks and game mechanics into one structured application.
 
 > Project status: Active development
