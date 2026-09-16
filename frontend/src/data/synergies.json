@@ -1,14 +1,382 @@
 [
   {
-    "id": "godhead-brimstone",
-    "items": ["godhead", "brimstone"],
+    "id": "brimstone-the-inner-eye",
+    "items": [
+      "brimstone-118",
+      "the-inner-eye-2"
+    ],
     "type": "positive",
-    "description": "Holy laser synergy"
+    "description": "Fires a spread of Brimstone beams.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Brimstone"
   },
   {
-    "id": "godhead-sacred-heart",
-    "items": ["godhead", "sacred-heart"],
+    "id": "brimstone-tammys-head",
+    "items": [
+      "brimstone-118",
+      "tammys-head-38"
+    ],
     "type": "positive",
-    "description": "Massive homing damage"
+    "description": "Shoots Brimstone beams in all directions.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Tammy%27s_Head"
+  },
+  {
+    "id": "brimstone-epic-fetus",
+    "items": [
+      "brimstone-118",
+      "epic-fetus-168"
+    ],
+    "type": "positive",
+    "description": "Missile explosions shoot ten Brimstone beams in all directions.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Epic_Fetus"
+  },
+  {
+    "id": "brimstone-technology",
+    "items": [
+      "brimstone-118",
+      "technology-68"
+    ],
+    "type": "positive",
+    "description": "The Technology laser coils around the Brimstone beam and gives a 1.5x damage multiplier.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Brimstone"
+  },
+  {
+    "id": "brimstone-rubber-cement",
+    "items": [
+      "brimstone-118",
+      "rubber-cement-221"
+    ],
+    "type": "positive",
+    "description": "The beam bounces off walls once and creates a second beam.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Rubber_Cement"
+  },
+  {
+    "id": "brimstone-crickets-body",
+    "items": [
+      "brimstone-118",
+      "crickets-body-224"
+    ],
+    "type": "positive",
+    "description": "Spawns split tears on the first enemy or obstacle the beam hits.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Brimstone"
+  },
+  {
+    "id": "brimstone-moms-knife",
+    "items": [
+      "brimstone-118",
+      "moms-knife-114"
+    ],
+    "type": "positive",
+    "description": "Throwing the knife also shoots a barrage of knives across the screen.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Mom%27s_Knife"
+  },
+  {
+    "id": "brimstone-monstros-lung",
+    "items": [
+      "brimstone-118",
+      "monstros-lung-229"
+    ],
+    "type": "neutral",
+    "description": "Brimstone has priority, Monstro's Lung does nothing.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Monstro%27s_Lung"
+  },
+  {
+    "id": "brimstone-tech-x",
+    "items": [
+      "brimstone-118",
+      "tech-x-395"
+    ],
+    "type": "positive",
+    "description": "Fires a Brimstone ring.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Tech_X"
+  },
+  {
+    "id": "brimstone-tiny-planet",
+    "items": [
+      "brimstone-118",
+      "tiny-planet-233"
+    ],
+    "type": "neutral",
+    "description": "The beam wraps around Isaac once and then shoots straight forward.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Tiny_Planet"
+  },
+  {
+    "id": "brimstone-proptosis",
+    "items": [
+      "brimstone-118",
+      "proptosis-261"
+    ],
+    "type": "positive",
+    "description": "Keeps the double damage without losing damage over range.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Proptosis"
+  },
+  {
+    "id": "brimstone-spoon-bender",
+    "items": [
+      "brimstone-118",
+      "spoon-bender-3"
+    ],
+    "type": "positive",
+    "description": "The beam curves toward enemies.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Spoon_Bender"
+  },
+  {
+    "id": "brimstone-chocolate-milk",
+    "items": [
+      "brimstone-118",
+      "chocolate-milk-69"
+    ],
+    "type": "neutral",
+    "description": "The beam takes longer to fully charge, but can be released at any point.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Brimstone"
+  },
+  {
+    "id": "epic-fetus-moms-knife",
+    "items": [
+      "moms-knife-114",
+      "epic-fetus-168"
+    ],
+    "type": "positive",
+    "description": "Each explosion shoots 10 knives in a circle.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Mom%27s_Knife"
+  },
+  {
+    "id": "moms-knife-the-inner-eye",
+    "items": [
+      "moms-knife-114",
+      "the-inner-eye-2"
+    ],
+    "type": "positive",
+    "description": "Fires 3 knives.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/The_Inner_Eye"
+  },
+  {
+    "id": "moms-knife-proptosis",
+    "items": [
+      "moms-knife-114",
+      "proptosis-261"
+    ],
+    "type": "positive",
+    "description": "Knife damage is doubled regardless of range.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Proptosis"
+  },
+  {
+    "id": "moms-knife-spoon-bender",
+    "items": [
+      "moms-knife-114",
+      "spoon-bender-3"
+    ],
+    "type": "positive",
+    "description": "The knife curves towards enemies.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Spoon_Bender"
+  },
+  {
+    "id": "dr-fetus-ipecac",
+    "items": [
+      "ipecac-149",
+      "dr-fetus-52"
+    ],
+    "type": "positive",
+    "description": "Bombs explode on contact, do no damage to Isaac and become Bob's Curse bombs.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Ipecac"
+  },
+  {
+    "id": "epic-fetus-ipecac",
+    "items": [
+      "ipecac-149",
+      "epic-fetus-168"
+    ],
+    "type": "positive",
+    "description": "Missiles turn green and poison enemies.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Ipecac"
+  },
+  {
+    "id": "ipecac-monstros-lung",
+    "items": [
+      "ipecac-149",
+      "monstros-lung-229"
+    ],
+    "type": "positive",
+    "description": "Fires a barrage of Ipecac shots without extra charge time.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Ipecac"
+  },
+  {
+    "id": "crickets-body-ipecac",
+    "items": [
+      "ipecac-149",
+      "crickets-body-224"
+    ],
+    "type": "positive",
+    "description": "The main tear splits into four explosive splash tears.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Ipecac"
+  },
+  {
+    "id": "ipecac-technology",
+    "items": [
+      "ipecac-149",
+      "technology-68"
+    ],
+    "type": "negative",
+    "description": "Ipecac loses its flat damage bonus, the laser becomes poisonous.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Ipecac"
+  },
+  {
+    "id": "ipecac-tech-x",
+    "items": [
+      "ipecac-149",
+      "tech-x-395"
+    ],
+    "type": "negative",
+    "description": "Ipecac's flat damage bonus is reduced to +4.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Ipecac"
+  },
+  {
+    "id": "epic-fetus-polyphemus",
+    "items": [
+      "polyphemus-169",
+      "epic-fetus-168"
+    ],
+    "type": "positive",
+    "description": "Missiles get a much bigger blast radius and more damage.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Epic_Fetus"
+  },
+  {
+    "id": "dr-fetus-polyphemus",
+    "items": [
+      "polyphemus-169",
+      "dr-fetus-52"
+    ],
+    "type": "positive",
+    "description": "Bombs get bigger and deal more damage.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Dr._Fetus"
+  },
+  {
+    "id": "polyphemus-proptosis",
+    "items": [
+      "polyphemus-169",
+      "proptosis-261"
+    ],
+    "type": "positive",
+    "description": "Tears deal massive damage and keep leftover damage while shrinking.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Proptosis"
+  },
+  {
+    "id": "20-20-polyphemus",
+    "items": [
+      "polyphemus-169",
+      "20-20-245"
+    ],
+    "type": "negative",
+    "description": "Damage is reduced and tear rate is increased.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Polyphemus"
+  },
+  {
+    "id": "monstros-lung-tech-x",
+    "items": [
+      "tech-x-395",
+      "monstros-lung-229"
+    ],
+    "type": "positive",
+    "description": "Fires 3-5 extra rings in a 30 degree spread.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Tech_X"
+  },
+  {
+    "id": "epic-fetus-tech-x",
+    "items": [
+      "tech-x-395",
+      "epic-fetus-168"
+    ],
+    "type": "positive",
+    "description": "Each missile shoots 10 Technology beams in all directions.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Tech_X"
+  },
+  {
+    "id": "rubber-cement-tech-x",
+    "items": [
+      "tech-x-395",
+      "rubber-cement-221"
+    ],
+    "type": "positive",
+    "description": "The rings bounce off walls once.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Tech_X"
+  },
+  {
+    "id": "godhead-tiny-planet",
+    "items": [
+      "godhead-331",
+      "tiny-planet-233"
+    ],
+    "type": "positive",
+    "description": "Tears with damaging auras orbit Isaac and form a damaging barrier.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Tiny_Planet"
+  },
+  {
+    "id": "crickets-body-godhead",
+    "items": [
+      "godhead-331",
+      "crickets-body-224"
+    ],
+    "type": "positive",
+    "description": "Main tears and split tears keep the aura and homing.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Godhead"
+  },
+  {
+    "id": "crickets-body-the-parasite",
+    "items": [
+      "crickets-body-224",
+      "the-parasite-104"
+    ],
+    "type": "positive",
+    "description": "Eight split tears instead of four.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Cricket%27s_Body"
+  },
+  {
+    "id": "proptosis-technology",
+    "items": [
+      "proptosis-261",
+      "technology-68"
+    ],
+    "type": "positive",
+    "description": "Doubles laser damage.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Proptosis"
+  },
+  {
+    "id": "dr-fetus-remote-detonator",
+    "items": [
+      "dr-fetus-52",
+      "remote-detonator-137"
+    ],
+    "type": "positive",
+    "description": "Bombs can be detonated on command.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Dr._Fetus"
+  },
+  {
+    "id": "dr-fetus-pyromaniac",
+    "items": [
+      "dr-fetus-52",
+      "pyromaniac-223"
+    ],
+    "type": "positive",
+    "description": "Explosions heal Isaac as long as he has a red heart container.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Dr._Fetus"
+  },
+  {
+    "id": "epic-fetus-pyromaniac",
+    "items": [
+      "epic-fetus-168",
+      "pyromaniac-223"
+    ],
+    "type": "positive",
+    "description": "Isaac becomes immune to his own airstrikes.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Epic_Fetus"
+  },
+  {
+    "id": "epic-fetus-monstros-lung",
+    "items": [
+      "epic-fetus-168",
+      "monstros-lung-229"
+    ],
+    "type": "positive",
+    "description": "2-4 extra crosshairs orbit the main one and each gets a missile.",
+    "source": "https://bindingofisaacrebirth.wiki.gg/wiki/Epic_Fetus"
   }
 ]

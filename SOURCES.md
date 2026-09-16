@@ -8,6 +8,12 @@
 - Only Repentance+ values are kept.
 - Item icons are not in this repo. The app loads them from the wiki and they belong to their owners.
 
+## Synergies
+
+- `frontend/src/data/synergies.json` is written by hand.
+- Every pair comes from the synergy section of an item page on https://bindingofisaacrebirth.wiki.gg (CC BY-SA 4.0). The exact page is saved in the `source` field of each entry.
+- The descriptions are short summaries in my own words, not copies of the wiki text.
+
 ## Heart Assets
 
 - Source page: https://bindingofisaacrebirth.fandom.com/wiki/Hearts

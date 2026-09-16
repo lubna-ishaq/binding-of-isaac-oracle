@@ -194,3 +194,43 @@
   border: 1px solid #666;
   border-radius: 6px;
 }
+
+.coach-answer__list {
+  margin: 0;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.coach-answer__list li + li {
+  margin-top: 6px;
+}
+
+.stat-table {
+  width: 100%;
+  margin: 0 auto 10px;
+  border-collapse: collapse;
+}
+
+.stat-table th,
+.stat-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-table th {
+  color: var(--text-muted);
+  font-weight: normal;
+  text-align: left;
+}
+
+.stat-table td {
+  text-align: right;
+}
+
+.stat-table .is-up {
+  color: #70b77e;
+}
+
+.stat-table .is-down {
+  color: #e58b8b;
+}

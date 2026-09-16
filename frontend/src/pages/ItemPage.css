@@ -59,3 +59,58 @@
 .item-page__type {
   text-transform: capitalize;
 }
+
+.item-page__synergies {
+  max-width: 700px;
+  margin: 30px auto 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.item-page__synergies h2 {
+  margin-top: 0;
+  color: var(--gold);
+}
+
+.item-page__synergies ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.synergy {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.synergy__partners {
+  font-weight: bold;
+}
+
+.synergy__type {
+  margin-left: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.synergy--positive .synergy__type {
+  background: #70b77e;
+  color: #000;
+}
+
+.synergy--negative .synergy__type {
+  background: #d96b6b;
+  color: #000;
+}
+
+.synergy--neutral .synergy__type {
+  background: var(--border);
+}
+
+.synergy p {
+  margin-top: 4px;
+}

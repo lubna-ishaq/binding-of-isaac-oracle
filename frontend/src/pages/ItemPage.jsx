@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 
 import ItemImage from "../components/ItemImage";
 import { useItems } from "../data/useItems";
+import { synergiesForItem } from "../utils/synergies";
 import "./ItemPage.css";
 
 function ItemPage() {
@@ -17,6 +18,7 @@ function ItemPage() {
   }
 
   const selectedItem = items.find((item) => item.id === itemId);
+  const itemNames = Object.fromEntries(items.map((item) => [item.id, item.name]));
 
   if (!selectedItem) {
     return (
@@ -62,7 +64,46 @@ function ItemPage() {
           <p className="item-page__type">{selectedItem.type}</p>
         </section>
       </div>
+
+      <SynergyList itemId={selectedItem.id} itemNames={itemNames} />
     </main>
+  );
+}
+
+function SynergyList({ itemId, itemNames }) {
+  const synergies = synergiesForItem(itemId);
+
+  if (synergies.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="item-page__synergies">
+      <h2>Synergies</h2>
+      <ul>
+        {synergies.map((synergy) => {
+          const partners = synergy.items.filter((id) => id !== itemId);
+
+          return (
+            <li key={synergy.id} className={`synergy synergy--${synergy.type}`}>
+              <span className="synergy__partners">
+                {partners.map((id, index) => (
+                  <span key={id}>
+                    {index > 0 && " + "}
+                    <Link to={`/item/${id}`}>{itemNames[id] ?? id}</Link>
+                  </span>
+                ))}
+              </span>
+              <span className="synergy__type">{synergy.type}</span>
+              <p>{synergy.description}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <p className="hint">
+        Source: <a href={synergies[0].source}>Binding of Isaac: Rebirth Wiki</a>
+      </p>
+    </section>
   );
 }
 

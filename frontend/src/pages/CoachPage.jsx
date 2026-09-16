@@ -7,6 +7,7 @@ import HealthSelector from "../components/Coach/HealthSelector";
 import ItemSelector from "../components/Coach/ItemSelector";
 import ScreenshotUploader from "../components/Coach/ScreenshotUploader";
 import { useItems } from "../data/useItems";
+import { analyzeBuild } from "../utils/coachAnalysis";
 import { createHealthSummary, hasConfiguredHealth } from "../utils/healthUtils";
 import "./CoachPage.css";
 
@@ -29,40 +30,11 @@ function analyzeScreenshot() {
   return detectItems();
 }
 
-function generateAdvice(question, buildItems, health) {
-  const isaacTerms = /isaac|item|synerg|build|character|boss|mod|stat|health|damage/i;
-
-  if (!isaacTerms.test(question)) {
-    return {
-      strengths: "I can only help with The Binding of Isaac.",
-      risks: "",
-      nextFocus: "",
-      healthSummary: [],
-    };
-  }
-
-  if (buildItems.length === 0) {
-    return {
-      strengths: "No build items selected yet.",
-      risks: "The build cannot be evaluated without items.",
-      nextFocus: "Upload a screenshot or select items from the database.",
-      healthSummary: createHealthSummary(health),
-    };
-  }
-
-  return {
-    strengths: `${buildItems.length} item(s) are ready for analysis.`,
-    risks: "This is a mocked analysis and does not detect stats or synergies yet.",
-    nextFocus: "Prioritize the stat your build is currently missing.",
-    healthSummary: createHealthSummary(health),
-  };
-}
-
 function CoachPage() {
   const items = useItems();
   const [screenshot, setScreenshot] = useState(null);
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState(null);
   const [buildItems, setBuildItems] = useState([]);
   const [health, setHealth] = useState(initialHealth);
   const [inputMode, setInputMode] = useState("items");
@@ -92,7 +64,10 @@ function CoachPage() {
   }
 
   function handleAnalyze() {
-    setResponse(generateAdvice(question, buildItems, health));
+    setResponse({
+      ...analyzeBuild(buildItems, health),
+      healthSummary: createHealthSummary(health),
+    });
   }
 
   return (
@@ -104,9 +79,9 @@ function CoachPage() {
       <h1 className="page-heading">ISAAC AI COACH</h1>
 
       <p className="preview-banner" role="note">
-        Preview: the build input and health system work, but the analysis
-        below is still a placeholder. Real synergy detection and screenshot
-        recognition are in development.
+        Preview: the analysis is rule-based for now. It reads the stat changes
+        from the item descriptions and checks known synergies. AI answers and
+        screenshot recognition are coming soon.
       </p>
 
       <div className="coach-tabs" role="tablist" aria-label="Build input">
@@ -151,11 +126,7 @@ function CoachPage() {
           onQuestionChange={setQuestion}
           onAnalyze={handleAnalyze}
           response={response}
-          canAnalyze={
-            question.trim().length > 0 &&
-            buildItems.length > 0 &&
-            hasConfiguredHealth(health)
-          }
+          canAnalyze={buildItems.length > 0 && hasConfiguredHealth(health)}
         />
       </div>
     </main>
